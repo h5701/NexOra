@@ -1,0 +1,172 @@
+import type { Metadata } from "next";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import CTAStrip from "@/components/home/CTAStrip";
+import CardTopLine from "@/components/ui/CardTopLine";
+import HeroOrbs from "@/components/ui/HeroOrbs";
+import SectionHeader from "@/components/ui/SectionHeader";
+import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
+import {
+  CARD_BODY_PADDING_COMPACT_CLASS,
+  CARD_DEPTH_INTERACTIVE_CLASS,
+} from "@/lib/styles";
+
+export const metadata: Metadata = {
+  title: "About — NexOra Digital Studio",
+  description:
+    "A modern software studio built for founders and businesses who want execution, not excuses.",
+};
+
+const founders = [
+  {
+    initials: "HA",
+    name: "Hina Ahmad",
+    role: "Co-founder · Product & Design Strategy",
+    body: "Hina leads product direction, UX strategy, and client experience at NexOra. She focuses on turning complex business ideas into clean, intuitive, and conversion-driven digital products. Her role ensures every product we build is not just functional, but intentional and user-focused.",
+    showStrengthsLabel: true,
+    tags: [
+      "UX Design",
+      "Product Strategy",
+      "Client Experience",
+      "Brand Direction",
+    ],
+  },
+  {
+    initials: "AT",
+    name: "Ali Tariq",
+    role: "Co-founder · Engineering & Systems",
+    body: "Ali leads engineering, architecture, and technical delivery at NexOra. He ensures every system is scalable, performant, and built using modern development standards. His focus is on clean architecture, reliability, and long-term maintainability.",
+    showStrengthsLabel: false,
+    tags: [
+      "Full-stack development",
+      "System architecture",
+      "Performance optimization",
+      "Scalable software",
+    ],
+  },
+];
+
+export default function AboutPage() {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <section className="relative scroll-mt-[100px] overflow-hidden bg-[var(--color-void)]">
+          <HeroOrbs />
+
+          <div className={`page-hero-py relative ${PAGE_CONTAINER_CLASS}`}>
+            <SectionHeader
+              eyebrow="Software studio"
+              title="About NexOra"
+              titleAs="h1"
+              lead="A modern software studio built for founders and businesses who want execution, not excuses."
+            />
+          </div>
+
+          <div
+            className="h-px w-full bg-[var(--color-border)]"
+            aria-hidden="true"
+          />
+        </section>
+
+        <section className="section-py scroll-mt-[100px] border-t border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+          <div className={PAGE_CONTAINER_CLASS}>
+            <SectionHeader eyebrow="Our story" title="Why we built NexOra" />
+
+            <div className="mt-[52px] max-w-[640px] space-y-5 text-[13px] font-light leading-[1.68] text-[var(--color-text-secondary)]">
+              <p>
+                NexOra was created from a simple frustration: most development
+                studios either overpromise, underdeliver, or fail to understand
+                what businesses actually need.
+              </p>
+              <p className="border-l-2 border-[var(--color-purple)] py-1 pl-5 text-base font-medium text-[var(--color-text-primary)]">
+                We wanted to change that.
+              </p>
+              <p>
+                Founded by Hina Ahmad and Ali Tariq, NexOra is a software studio
+                built around clarity, execution, and product thinking. We
+                don&apos;t just build websites or applications — we build
+                systems that help businesses grow, scale, and operate more
+                efficiently.
+              </p>
+              <p>
+                From startups validating their first product to established
+                businesses upgrading their digital infrastructure, NexOra exists
+                to bridge the gap between ideas and real-world execution.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-py scroll-mt-[100px] border-t border-[var(--color-border)] bg-[var(--color-void)]">
+          <div className={PAGE_CONTAINER_CLASS}>
+            <SectionHeader
+              eyebrow="Founders"
+              title="The people behind NexOra"
+            />
+
+            <div className="mt-[52px] grid grid-cols-1 gap-[14px] md:grid-cols-2">
+              {founders.map((founder) => (
+                <article
+                  key={founder.name}
+                  className={`${CARD_DEPTH_INTERACTIVE_CLASS} ${CARD_BODY_PADDING_COMPACT_CLASS}`}
+                >
+                  <CardTopLine />
+
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(123,94,167,0.3)] bg-[rgba(123,94,167,0.15)] text-base font-semibold text-[var(--color-purple-hover)]">
+                    {founder.initials}
+                  </div>
+
+                  <h3 className="font-[family-name:var(--font-display)] text-[18px] font-semibold text-[var(--color-text-primary)]">
+                    {founder.name}
+                  </h3>
+
+                  <p className="mt-2 text-[11px] font-medium tracking-[0.1em] text-[var(--color-cyan)] uppercase">
+                    {founder.role}
+                  </p>
+
+                  <p className="mt-4 text-[13px] font-light leading-[1.68] text-[var(--color-text-secondary)]">
+                    {founder.body}
+                  </p>
+
+                  {founder.showStrengthsLabel && (
+                    <p className="mt-6 text-[10px] font-medium tracking-[0.1em] text-[var(--color-text-muted)] uppercase">
+                      Key strengths
+                    </p>
+                  )}
+
+                  <div
+                    className={`flex flex-wrap gap-2 ${founder.showStrengthsLabel ? "mt-3" : "mt-6"}`}
+                  >
+                    {founder.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-[var(--color-border)] px-[10px] py-1 text-[10px] font-medium tracking-[0.07em] text-[var(--color-text-muted)] uppercase"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-py scroll-mt-[100px] border-t border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+          <div className={`${PAGE_CONTAINER_CLASS} max-w-[760px] text-center`}>
+            <p className="text-[10px] font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase">
+              Our mission
+            </p>
+            <p className="text-headline-section mt-[14px] font-[family-name:var(--font-display)] font-bold leading-[1.08] tracking-[-0.03em] text-[var(--color-text-primary)]">
+              We exist to bridge the gap between ideas and real-world execution.
+            </p>
+          </div>
+        </section>
+
+        <CTAStrip />
+        <Footer />
+      </main>
+    </>
+  );
+}

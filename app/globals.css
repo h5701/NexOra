@@ -1,0 +1,264 @@
+@import "tailwindcss";
+
+:root {
+  --color-void: #04061a;
+  --color-surface: #07091d;
+  --color-surface-alt: #030516;
+  --color-surface-raised: #0c0f28;
+  --color-border: rgba(255, 255, 255, 0.05);
+  --color-border-bright: rgba(255, 255, 255, 0.12);
+
+  --color-text-primary: #ede9f8;
+  --color-text-secondary: rgba(237, 233, 248, 0.42);
+  --color-text-muted: rgba(237, 233, 248, 0.22);
+
+  --color-purple: #7b5ea7;
+  --color-purple-dark: #5b4080;
+  --color-purple-hover: #9170c2;
+  --color-purple-glow: rgba(123, 94, 167, 0.25);
+
+  --color-cyan: #2dd4bf;
+  --color-cyan-glow: rgba(45, 212, 191, 0.08);
+
+  --color-card: #11142e;
+  --color-card-hover: #181c3d;
+  --color-card-border: rgba(255, 255, 255, 0.14);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  --gradient-hero: linear-gradient(
+    110deg,
+    #c4a3e8 0%,
+    #7b9fe8 40%,
+    #2dd4bf 80%
+  );
+  --gradient-button: linear-gradient(135deg, #7b5ea7, #5b4080);
+  --gradient-logo: linear-gradient(110deg, #a07fd4, #2dd4bf);
+  --gradient-accent: linear-gradient(110deg, #a07fd4, #2dd4bf);
+  --gradient-line: linear-gradient(
+    90deg,
+    transparent,
+    rgba(123, 94, 167, 0.3) 30%,
+    rgba(45, 212, 191, 0.3) 70%,
+    transparent
+  );
+  --gradient-step-hover: linear-gradient(
+    90deg,
+    rgba(123, 94, 167, 0.6),
+    rgba(45, 212, 191, 0.6)
+  );
+  --gradient-card-top: linear-gradient(
+    90deg,
+    var(--color-purple),
+    var(--color-cyan)
+  );
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-text-primary);
+  font-family: var(--font-body), sans-serif;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+}
+
+.hero-reveal.is-visible {
+  animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@layer utilities {
+  .section-py {
+    @apply py-14 md:py-24;
+  }
+
+  .page-hero-py {
+    @apply pt-[calc(3.5rem+65px)] pb-14 md:pt-[calc(96px+65px)] md:pb-24;
+  }
+
+  .text-headline-hero {
+    font-size: clamp(28px, 8vw, 68px);
+  }
+
+  @media (min-width: 768px) {
+    .text-headline-hero {
+      font-size: clamp(52px, 7vw, 72px);
+    }
+  }
+
+  .text-headline-section {
+    font-size: clamp(26px, 5.5vw, 44px);
+  }
+
+  @media (min-width: 768px) {
+    .text-headline-section {
+      font-size: clamp(32px, 4vw, 44px);
+    }
+  }
+
+  .stat-accent {
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .stat-first-accent::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 44px;
+    right: 44px;
+    height: 1px;
+    background: var(--gradient-line);
+  }
+
+  .text-headline-cta {
+    font-size: clamp(24px, 5.5vw, 36px);
+  }
+
+  .gradient-hero-text {
+    background-image: var(--gradient-hero);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .gradient-logo-text {
+    background-image: var(--gradient-logo);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .card-depth {
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1.5px solid var(--color-card-border);
+    background: var(--color-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-depth-interactive {
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .card-depth-interactive:hover {
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.25);
+    background: var(--color-card-hover);
+  }
+
+  .card-top-line {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 2px;
+    background: var(--gradient-card-top);
+  }
+
+  .btn-primary {
+    padding: 15px 30px;
+    background: var(--gradient-button);
+    color: #ffffff;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    box-shadow: 0 8px 32px var(--color-purple-glow);
+  }
+
+  .btn-primary-nav {
+    padding: 9px 22px;
+    background: var(--gradient-button);
+    color: #ffffff;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .hero-orb {
+    pointer-events: none;
+    position: absolute;
+    border-radius: 9999px;
+  }
+
+  .hero-orb-purple {
+    top: -120px;
+    left: -80px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+      circle,
+      rgba(123, 94, 167, 0.14) 0%,
+      transparent 65%
+    );
+  }
+
+  .hero-orb-cyan {
+    top: 40px;
+    right: -60px;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(
+      circle,
+      rgba(45, 212, 191, 0.07) 0%,
+      transparent 65%
+    );
+  }
+
+  .service-tag-rule {
+    display: block;
+    height: 1px;
+    width: 18px;
+    flex-shrink: 0;
+    background: rgba(237, 233, 248, 0.12);
+  }
+
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: 9999px;
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-text-primary) 40%, transparent);
+  }
+
+  .hero-pill-dot {
+    height: 6px;
+    width: 6px;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: var(--color-cyan);
+    box-shadow: 0 0 10px rgba(45, 212, 191, 0.8);
+  }
+}

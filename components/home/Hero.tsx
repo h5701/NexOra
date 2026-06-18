@@ -1,0 +1,102 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import HeroOrbs from "@/components/ui/HeroOrbs";
+import PrimaryButton from "@/components/ui/PrimaryButton";
+import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
+
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`hero-reveal ${visible ? "is-visible" : ""} ${className}`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      {children}
+    </div>
+  );
+}
+
+export default function Hero() {
+  return (
+    <section className="relative scroll-mt-[100px] overflow-hidden bg-[var(--color-void)]">
+      <HeroOrbs />
+
+      <div className={`page-hero-py ${PAGE_CONTAINER_CLASS}`}>
+        <Reveal delay={0}>
+          <div className="hero-pill mb-9">
+            <span className="hero-pill-dot" aria-hidden="true" />
+            Digital product studio · UK
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <h1 className="text-headline-hero max-w-full font-[family-name:var(--font-display)] font-extrabold leading-[0.95] tracking-[-0.04em] md:leading-[0.92] md:tracking-[-0.045em]">
+            <span className="block text-[var(--color-text-primary)]">
+              We build digital
+            </span>
+            <span className="gradient-hero-text block">products that work.</span>
+          </h1>
+        </Reveal>
+
+        <Reveal delay={0.16}>
+          <div className="mt-[52px] flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+            <p className="max-w-[420px] text-base font-light leading-[1.72] text-[var(--color-text-secondary)]">
+              Platforms, applications, and high-performance websites for
+              founders who need it done properly — the first time.
+            </p>
+
+            <div className="flex flex-col items-start gap-4 md:items-end">
+              <PrimaryButton href="/contact">Start a project →</PrimaryButton>
+              <Link
+                href="#work"
+                className="group/link inline-flex items-center gap-[5px] border-0 bg-transparent text-[13px] font-normal text-[var(--color-text-muted)] no-underline transition-colors duration-150 hover:text-[var(--color-cyan)]"
+              >
+                <span>See our work</span>
+                <span className="transition-transform duration-150 group-hover/link:translate-x-1">
+                  →
+                </span>
+              </Link>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+
+      <div
+        className="h-px w-full"
+        style={{ background: "var(--gradient-line)" }}
+        aria-hidden="true"
+      />
+    </section>
+  );
+}
