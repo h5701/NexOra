@@ -1,6 +1,6 @@
 import Reveal from "@/components/ui/Reveal";
 import CardTopLine from "@/components/ui/CardTopLine";
-import { CARD_DEPTH_CLASS } from "@/lib/styles";
+import { CARD_DEPTH_CLASS, MT_SPACE_4 } from "@/lib/styles";
 
 /**
  * Set to true once real client testimonial data is supplied below.
@@ -34,7 +34,7 @@ export default function Testimonial() {
   }
 
   return (
-    <Reveal className="mt-[14px]">
+    <Reveal className={MT_SPACE_4}>
       <figure
         className={`${CARD_DEPTH_CLASS} relative grid grid-cols-1 gap-8 px-6 py-8 md:grid-cols-[auto_1fr] md:items-center md:gap-12 md:px-12 md:py-11`}
       >

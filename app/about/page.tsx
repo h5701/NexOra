@@ -9,6 +9,9 @@ import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
   CARD_BODY_PADDING_COMPACT_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
+  GAP_CARD_GRID,
+  MT_SPACE_4,
+  MT_SPACE_SECTION,
   SECTION_DARK_CLASS,
   SECTION_HERO_DARK_CLASS,
   SECTION_TINT_CLASS,
@@ -76,7 +79,7 @@ export default function AboutPage() {
           <div className={PAGE_CONTAINER_CLASS}>
             <SectionHeader eyebrow="Our story" title="Why we built NexOra" />
 
-            <div className="mt-[52px] max-w-[640px] space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]">
+            <div className={`${MT_SPACE_SECTION} max-w-[640px] space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]`}>
               <p>
                 NexOra was created from a simple frustration: most development
                 studios either overpromise, underdeliver, or fail to understand
@@ -108,7 +111,7 @@ export default function AboutPage() {
               title="The people behind NexOra"
             />
 
-            <div className="mt-[52px] grid grid-cols-1 gap-[14px] md:grid-cols-2">
+            <div className={`${MT_SPACE_SECTION} grid grid-cols-1 md:grid-cols-2 ${GAP_CARD_GRID}`}>
               {founders.map((founder) => (
                 <article
                   key={founder.name}
@@ -161,7 +164,7 @@ export default function AboutPage() {
             <p className="text-xs font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase">
               Our mission
             </p>
-            <p className="text-headline-section mt-[14px] font-[family-name:var(--font-display)] font-bold leading-headline tracking-[-0.03em] text-[var(--color-text-primary)]">
+            <p className={`text-headline-section ${MT_SPACE_4} font-[family-name:var(--font-display)] font-bold leading-headline tracking-[-0.03em] text-[var(--color-text-primary)]`}>
               We exist to bridge the gap between ideas and real-world execution.
             </p>
           </div>

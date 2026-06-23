@@ -7,6 +7,9 @@ import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
   CARD_BODY_PADDING_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
+  GAP_CARD_GRID,
+  MT_SPACE_4,
+  MT_SPACE_SECTION,
 } from "@/lib/styles";
 
 function TierBadge({
@@ -37,7 +40,7 @@ export default function Services() {
       <div className={PAGE_CONTAINER_CLASS}>
         <EyebrowLabel>What we build</EyebrowLabel>
 
-        <div className="mt-[14px] flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className={`${MT_SPACE_4} flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between`}>
           <h2 className="text-headline-section text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
             Platforms, AI, and infrastructure — shipped properly.
           </h2>
@@ -53,8 +56,8 @@ export default function Services() {
           </Link>
         </div>
 
-        <div className="mt-[52px]">
-          <div className="grid grid-cols-1 gap-[14px] sm:grid-cols-2">
+        <div className={MT_SPACE_SECTION}>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 ${GAP_CARD_GRID}`}>
             {homeBuildServices.map((service, index) => (
               <Reveal
                 key={service.title}

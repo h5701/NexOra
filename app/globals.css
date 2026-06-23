@@ -116,6 +116,10 @@
   --fs-quote-metric: clamp(2rem, 1.4rem + 2.2vw, 2.75rem);
   --fs-display: clamp(1.75rem, 0.875rem + 5.5vw, 4.5rem);
 
+  /* Spacing scale — replaces ad-hoc 14px / 52px magic numbers */
+  --space-4: 14px;
+  --space-section: 52px;
+
   /* Line-height ratios — unitless, scale with font-size */
   --lh-display: 1.05;
   --lh-headline: 1.08;
@@ -319,6 +323,18 @@ body {
 }
 
 @layer utilities {
+  .mt-space-4 {
+    margin-top: var(--space-4);
+  }
+
+  .mt-space-section {
+    margin-top: var(--space-section);
+  }
+
+  .gap-space-4 {
+    gap: var(--space-4);
+  }
+
   .section-py {
     @apply py-14 md:py-24;
   }

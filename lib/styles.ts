@@ -19,3 +19,10 @@ export const CARD_BODY_PADDING_CLASS = "px-6 py-8 md:px-[34px] md:py-[38px]";
 
 export const CARD_BODY_PADDING_COMPACT_CLASS =
   "px-6 py-8 md:px-[30px] md:py-9";
+
+/** Eyebrow → title / tight card grid gap (14px) */
+export const MT_SPACE_4 = "mt-[var(--space-4)]";
+/** Section header → content block (52px) */
+export const MT_SPACE_SECTION = "mt-[var(--space-section)]";
+/** Standard card grid gap */
+export const GAP_CARD_GRID = "gap-[var(--space-4)]";

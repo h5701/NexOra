@@ -1,6 +1,7 @@
 import HeroBackdrop from "@/components/ui/HeroBackdrop";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import Reveal from "@/components/ui/Reveal";
+import { MT_SPACE_4 } from "@/lib/styles";
 
 export default function CTAStrip() {
   return (
@@ -22,7 +23,7 @@ export default function CTAStrip() {
           What&apos;s next
         </p>
 
-        <h2 className="text-headline-cta mx-auto mt-[14px] w-full max-w-[520px] font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
+        <h2 className={`text-headline-cta mx-auto ${MT_SPACE_4} w-full max-w-[520px] font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}>
           <span className="block">We&apos;re selective about</span>
           <span className="block">the projects we take on.</span>
         </h2>

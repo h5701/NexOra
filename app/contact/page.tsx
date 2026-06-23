@@ -9,6 +9,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
   CARD_BODY_PADDING_CLASS,
+  MT_SPACE_4,
   SECTION_HERO_DARK_CLASS,
   SECTION_TINT_CLASS,
 } from "@/lib/styles";
@@ -64,7 +65,7 @@ export default function ContactPage({
                 <p className="text-xs font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase">
                   How it works
                 </p>
-                <ul className="mt-[14px] space-y-5">
+                <ul className={`${MT_SPACE_4} space-y-5`}>
                   {howItWorks.map((item, index) => (
                     <li key={item} className="flex items-start gap-4">
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-purple)] bg-[rgba(123,94,167,0.15)] text-xs font-semibold tracking-[0.04em] text-[var(--color-purple)]">

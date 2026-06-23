@@ -10,6 +10,8 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
   CARD_DEPTH_CLASS,
+  MT_SPACE_4,
+  MT_SPACE_SECTION,
   SECTION_DARK_CLASS,
   SECTION_TINT_CLASS,
 } from "@/lib/styles";
@@ -163,7 +165,7 @@ function CaseStudySectionBlock({
     >
       <div className={PAGE_CONTAINER_CLASS}>
         <SectionHeader eyebrow={section.eyebrow} title={section.headline} />
-        <div className="mt-[52px] max-w-[640px]">{proseBlock}</div>
+        <div className={`${MT_SPACE_SECTION} max-w-[640px]`}>{proseBlock}</div>
       </div>
     </section>
   );
@@ -208,7 +210,7 @@ export default function CaseStudyPage({ content }: { content: CaseStudyContent }
               {content.eyebrow}
             </div>
 
-            <h1 className="text-headline-section mt-[14px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
+            <h1 className={`text-headline-section ${MT_SPACE_4} text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}>
               {content.title}
             </h1>
             <p className="mt-5 max-w-[560px] text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">

@@ -2,6 +2,7 @@ import DepthCard from "@/components/ui/DepthCard";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import Reveal from "@/components/ui/Reveal";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
+import { MT_SPACE_4, MT_SPACE_SECTION } from "@/lib/styles";
 
 const steps = [
   {
@@ -32,11 +33,11 @@ export default function Process() {
       <div className={PAGE_CONTAINER_CLASS}>
         <EyebrowLabel>The process</EyebrowLabel>
 
-        <h2 className="text-headline-section mt-[14px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
+        <h2 className={`text-headline-section ${MT_SPACE_4} text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}>
           From brief to live product. No surprises.
         </h2>
 
-        <Reveal className="mt-[52px] overflow-hidden">
+        <Reveal className={`${MT_SPACE_SECTION} overflow-hidden`}>
           <DepthCard interactive={false}>
             <div className="grid grid-cols-1 md:grid-cols-4">
               {steps.map((step, index) => (

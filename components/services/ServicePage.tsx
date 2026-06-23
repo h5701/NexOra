@@ -7,8 +7,10 @@ import DarkPageHero, { GradientHeroTitle } from "@/components/ui/DarkPageHero";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
+import { servicePages } from "@/lib/services/content";
 import type { ServicePageContent } from "@/lib/services/types";
 import {
+  MT_SPACE_SECTION,
   SECTION_DARK_CLASS,
   SECTION_TINT_CLASS,
 } from "@/lib/styles";
@@ -90,6 +92,8 @@ function ToolChips({ tools }: { tools: string[] }) {
 
 export default function ServicePage({ content }: { content: ServicePageContent }) {
   const contactHref = `/contact?type=${encodeURIComponent(content.contactProjectType)}`;
+  const serviceIndex = servicePages.findIndex((s) => s.slug === content.slug);
+  const approachImageOnLeft = serviceIndex % 2 === 1;
 
   return (
     <>
@@ -117,7 +121,7 @@ export default function ServicePage({ content }: { content: ServicePageContent }
             <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
               <div>
                 <SectionHeader eyebrow="Overview" title="What this is" />
-                <div className="mt-[52px] space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]">
+                <div className={`${MT_SPACE_SECTION} space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]`}>
                   {content.whatThisIs.map((paragraph) => (
                     <p key={paragraph.slice(0, 40)}>{paragraph}</p>
                   ))}
@@ -136,7 +140,7 @@ export default function ServicePage({ content }: { content: ServicePageContent }
               title="What we deliver"
               lead="Concrete artifacts — not adjectives."
             />
-            <div className="mt-[52px] max-w-[640px]">
+            <div className={`${MT_SPACE_SECTION} max-w-[640px]`}>
               <DeliverableList items={content.deliverables} />
             </div>
           </div>
@@ -145,12 +149,12 @@ export default function ServicePage({ content }: { content: ServicePageContent }
         <section className={`section-py ${SECTION_TINT_CLASS}`}>
           <div className={PAGE_CONTAINER_CLASS}>
             <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
-              <div>
+              <div className={approachImageOnLeft ? "lg:order-2" : undefined}>
                 <SectionHeader
                   eyebrow="Engineering approach"
                   title="How we approach it"
                 />
-                <div className="mt-[52px]">
+                <div className={MT_SPACE_SECTION}>
                   <PracticeList
                     intro={content.approach.intro}
                     practices={content.approach.practices}
@@ -158,7 +162,9 @@ export default function ServicePage({ content }: { content: ServicePageContent }
                 </div>
               </div>
 
-              <ServiceOverviewFigure image={content.bodyImage} />
+              <div className={approachImageOnLeft ? "lg:order-1" : undefined}>
+                <ServiceOverviewFigure image={content.bodyImage} />
+              </div>
             </div>
           </div>
         </section>
@@ -166,7 +172,7 @@ export default function ServicePage({ content }: { content: ServicePageContent }
         <section className={`section-py ${SECTION_DARK_CLASS}`}>
           <div className={PAGE_CONTAINER_CLASS}>
             <SectionHeader eyebrow="Stack" title="Tech & tools" />
-            <div className="mt-[52px]">
+            <div className={MT_SPACE_SECTION}>
               <ToolChips tools={content.tools} />
             </div>
           </div>

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AlidaCarePreview from "@/components/home/AlidaCarePreview";
-import FikrLessPreview from "@/components/home/FikrLessPreview";
+import PortfolioGrid from "@/components/portfolio/PortfolioGrid";
 import CTAStrip from "@/components/home/CTAStrip";
 import ServiceHubCard from "@/components/services/ServiceHubCard";
 import ServiceOverviewFigure from "@/components/services/ServiceOverviewFigure";
@@ -12,7 +11,6 @@ import DarkPageHero, { GradientHeroTitle } from "@/components/ui/DarkPageHero";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
-  CASE_STUDY_SUMMARIES,
   PORTFOLIO_HEADLINE,
   PORTFOLIO_LEAD,
   STUDIO_POSITIONING,
@@ -22,6 +20,8 @@ import { advancedAiCallout, serviceHubGroups, getServicesByCategory } from "@/li
 import {
   CARD_BODY_PADDING_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
+  GAP_CARD_GRID,
+  MT_SPACE_SECTION,
   SECTION_DARK_CLASS,
   SECTION_LIGHT_CLASS,
   SECTION_TINT_CLASS,
@@ -58,7 +58,7 @@ export default function ServicesPage() {
                   title="What we build"
                   lead="Structured services for real product work — every engagement scoped around usable systems, not disconnected deliverables."
                 />
-                <div className="mt-[52px] max-w-[640px] space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]">
+                <div className={`${MT_SPACE_SECTION} max-w-[640px] space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]`}>
                   <p>
                     We work with founders and businesses to design, build, and scale
                     digital products. From early-stage MVPs to production-ready
@@ -93,7 +93,7 @@ export default function ServicesPage() {
                 lead={group.description}
               />
 
-              <div className="mt-[52px] grid grid-cols-1 gap-[14px] sm:grid-cols-2 lg:grid-cols-3">
+              <div className={`${MT_SPACE_SECTION} grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ${GAP_CARD_GRID}`}>
                 {getServicesByCategory(group.id).map((service) => (
                   <ServiceHubCard key={service.slug} service={service} />
                 ))}
@@ -142,54 +142,7 @@ export default function ServicesPage() {
               lead={PORTFOLIO_LEAD}
             />
 
-            <div className="mt-[52px] grid grid-cols-1 gap-[14px] md:grid-cols-[1.65fr_1fr]">
-              {CASE_STUDY_SUMMARIES.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  aria-label={`View the ${item.title} case study`}
-                  className={`group ${CARD_DEPTH_INTERACTIVE_CLASS} flex flex-col no-underline`}
-                >
-                  <CardTopLine />
-                  {item.preview === "alida" ? (
-                    <AlidaCarePreview />
-                  ) : (
-                    <FikrLessPreview />
-                  )}
-                  <div className="flex flex-1 flex-col bg-[var(--color-card)] px-6 py-6 md:px-7 md:py-[26px]">
-                    <div className="mb-[13px] flex flex-wrap gap-[6px]">
-                      {item.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className={`inline-flex items-center gap-1.5 rounded-full border px-[10px] py-1 text-xs font-medium tracking-[0.07em] uppercase ${
-                            tag === item.liveTag
-                              ? "border-[rgba(45,212,191,0.3)] text-[var(--color-cyan)]"
-                              : "border-[var(--color-border)] text-[var(--color-text-muted)]"
-                          }`}
-                        >
-                          {tag === item.liveTag && (
-                            <span className="live-dot" aria-hidden="true" />
-                          )}
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-text-primary)]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-[10px] text-sm font-light leading-body text-[var(--color-text-secondary)]">
-                      {item.body}
-                    </p>
-                    <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-[var(--color-cyan)]">
-                      View case study
-                      <span className="transition-transform duration-150 motion-safe:group-hover:translate-x-1">
-                        →
-                      </span>
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <PortfolioGrid className={MT_SPACE_SECTION} />
           </div>
         </section>
 

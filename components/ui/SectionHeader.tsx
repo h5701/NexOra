@@ -1,5 +1,7 @@
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 
+import { MT_SPACE_4 } from "@/lib/styles";
+
 export default function SectionHeader({
   eyebrow,
   title,
@@ -18,7 +20,7 @@ export default function SectionHeader({
   return (
     <div className={className}>
       <EyebrowLabel>{eyebrow}</EyebrowLabel>
-      <TitleTag className="text-headline-section mt-[14px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
+      <TitleTag className={`text-headline-section ${MT_SPACE_4} text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}>
         {title}
       </TitleTag>
       {lead && (

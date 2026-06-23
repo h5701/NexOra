@@ -4,6 +4,7 @@ import HeroOrbs from "@/components/ui/HeroOrbs";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import Reveal from "@/components/ui/Reveal";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
+import { MT_SPACE_SECTION } from "@/lib/styles";
 
 export default function Hero() {
   return (
@@ -39,7 +40,7 @@ export default function Hero() {
         </Reveal>
 
         <Reveal delay={0.16}>
-          <div className="mt-[52px] flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+          <div className={`${MT_SPACE_SECTION} flex flex-col items-start justify-between gap-8 md:flex-row md:items-end`}>
             <p className="max-w-[440px] text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
               Platforms, web apps, and AI systems for UK founders — scoped
               clearly, built to hold up in production.

@@ -4,7 +4,7 @@ import HeroBackdrop from "@/components/ui/HeroBackdrop";
 import HeroOrbs from "@/components/ui/HeroOrbs";
 import Reveal from "@/components/ui/Reveal";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
-import { SECTION_HERO_DARK_CLASS } from "@/lib/styles";
+import { SECTION_HERO_DARK_CLASS, MT_SPACE_SECTION } from "@/lib/styles";
 
 type DarkPageHeroProps = {
   pill: React.ReactNode;
@@ -45,7 +45,7 @@ export default function DarkPageHero({
         </Reveal>
 
         <Reveal delay={0.16}>
-          <p className="mt-[52px] max-w-[560px] text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
+          <p className={`${MT_SPACE_SECTION} max-w-[560px] text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]`}>
             {lead}
           </p>
           {footer && <div className="mt-8">{footer}</div>}
