@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import ServicesMegaMenu, {
+  ServicesNavTrigger,
+} from "@/components/layout/ServicesMegaMenu";
 import Logo from "@/components/ui/Logo";
 import PrimaryButton from "@/components/ui/PrimaryButton";
-import { NAV_LINKS } from "@/lib/constants";
+import { NAV_LINKS, NAV_SERVICE_GROUPS } from "@/lib/constants";
 
 function NavLink({
   href,
@@ -21,7 +24,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`text-[13px] font-normal leading-none text-[var(--color-text-muted)] transition-colors duration-150 hover:text-[var(--color-text-primary)] ${className}`}
+      className={`text-sm font-normal leading-none text-[var(--color-text-muted)] transition-colors duration-150 hover:text-[var(--color-text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cyan)] ${className}`}
     >
       {label}
     </Link>
@@ -31,6 +34,27 @@ function NavLink({
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openServicesMenu = () => {
+    if (servicesCloseTimer.current) {
+      clearTimeout(servicesCloseTimer.current);
+      servicesCloseTimer.current = null;
+    }
+    setServicesOpen(true);
+  };
+
+  const closeServicesMenu = () => {
+    servicesCloseTimer.current = setTimeout(() => setServicesOpen(false), 200);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -46,27 +70,41 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
-  const closeMobile = () => setMobileOpen(false);
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setMobileServicesOpen(false);
+  };
 
   return (
     <>
       <header
-        className={`fixed top-0 right-0 left-0 z-[100] border-b px-[clamp(24px,5vw,80px)] py-4 transition-[background,backdrop-filter,border-color] duration-300 ease md:py-[22px] ${
-          scrolled || mobileOpen
-            ? "border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-void)_88%,transparent)] backdrop-blur-[14px]"
-            : "border-transparent bg-transparent"
+        className={`fixed top-0 right-0 left-0 z-[100] border-b px-[clamp(24px,5vw,80px)] transition-[background,backdrop-filter,border-color,padding,box-shadow] duration-300 ease ${
+          scrolled || mobileOpen || servicesOpen
+            ? "border-[var(--color-border)] bg-[color-mix(in_srgb,white_82%,transparent)] py-3 shadow-[0_8px_30px_-16px_rgba(22,24,43,0.25)] backdrop-blur-[14px] md:py-[14px]"
+            : "surface-dark !bg-transparent border-transparent py-4 md:py-[22px]"
         }`}
       >
-        <div className="flex items-center justify-between gap-4">
+        <div className="relative flex items-center justify-between gap-4">
           <Logo onClick={closeMobile} />
 
           <nav
             className="hidden items-center gap-8 md:flex"
             aria-label="Main navigation"
           >
-            {NAV_LINKS.map((link) => (
-              <NavLink key={link.href} href={link.href} label={link.label} />
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.label === "Services" ? (
+                <div
+                  key={link.href}
+                  className="relative"
+                  onMouseEnter={openServicesMenu}
+                  onMouseLeave={closeServicesMenu}
+                >
+                  <ServicesNavTrigger open={servicesOpen} />
+                </div>
+              ) : (
+                <NavLink key={link.href} href={link.href} label={link.label} />
+              )
+            )}
           </nav>
 
           <div className="hidden md:block">
@@ -77,7 +115,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="-mr-2 flex h-10 w-10 shrink-0 items-center justify-center text-[var(--color-text-primary)] md:hidden"
+            className="-mr-2 flex h-10 w-10 shrink-0 items-center justify-center text-[var(--color-text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cyan)] md:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -116,30 +154,92 @@ export default function Navbar() {
             )}
           </button>
         </div>
+
+        <ServicesMegaMenu
+          open={servicesOpen}
+          onOpen={openServicesMenu}
+          onClose={closeServicesMenu}
+        />
       </header>
 
       {mobileOpen && (
         <>
           <button
             type="button"
-            className="fixed inset-0 z-[98] bg-[rgba(4,6,26,0.6)] backdrop-blur-[2px] md:hidden"
+            className="fixed inset-0 z-[98] bg-[rgba(22,24,43,0.35)] backdrop-blur-[2px] md:hidden"
             aria-label="Close menu"
             onClick={closeMobile}
           />
           <div
             id="mobile-nav"
-            className="fixed top-[65px] right-0 left-0 z-[99] flex max-h-[calc(100vh-65px)] flex-col gap-8 overflow-y-auto border-t border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-void)_97%,transparent)] px-[clamp(24px,5vw,80px)] py-10 backdrop-blur-[14px] md:hidden"
+            className="fixed top-[64px] right-0 left-0 z-[99] flex max-h-[calc(100vh-64px)] flex-col gap-8 overflow-y-auto border-t border-[var(--color-border)] bg-[color-mix(in_srgb,white_97%,transparent)] px-[clamp(24px,5vw,80px)] py-10 backdrop-blur-[14px] md:hidden"
           >
             <nav className="flex flex-col gap-6" aria-label="Mobile navigation">
-              {NAV_LINKS.map((link) => (
-                <NavLink
-                  key={link.href}
-                  href={link.href}
-                  label={link.label}
-                  onClick={closeMobile}
-                  className="text-[15px]"
-                />
-              ))}
+              <NavLink href="/" label="Home" onClick={closeMobile} className="text-md" />
+              <NavLink href="/about" label="About" onClick={closeMobile} className="text-md" />
+
+              <div>
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between text-md text-sm font-normal leading-none text-[var(--color-text-muted)]"
+                  aria-expanded={mobileServicesOpen}
+                  onClick={() => setMobileServicesOpen((open) => !open)}
+                >
+                  Services
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    aria-hidden="true"
+                    className={`transition-transform duration-300 motion-safe:origin-center ${
+                      mobileServicesOpen ? "rotate-180" : ""
+                    }`}
+                  >
+                    <path
+                      d="M2.5 4.5L6 8L9.5 4.5"
+                      stroke="currentColor"
+                      strokeWidth="1.25"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                {mobileServicesOpen && (
+                  <div className="nav-mobile-services mt-4 flex flex-col gap-5 pl-3">
+                    {NAV_SERVICE_GROUPS.map((group, groupIndex) => (
+                      <div
+                        key={group.label}
+                        className="nav-mobile-services-group"
+                        style={{ animationDelay: `${groupIndex * 50}ms` }}
+                      >
+                        <p className="text-xs font-medium tracking-[0.1em] text-[var(--color-text-muted)] uppercase">
+                          {group.label}
+                        </p>
+                        <ul className="mt-2 flex flex-col gap-2">
+                          {group.links.map((link) => (
+                            <li key={link.href}>
+                              <NavLink
+                                href={link.href}
+                                label={link.label}
+                                onClick={closeMobile}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                    <NavLink
+                      href="/services"
+                      label="View all services"
+                      onClick={closeMobile}
+                      className="font-semibold text-[var(--color-cyan)]"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <NavLink href="/contact" label="Contact" onClick={closeMobile} className="text-md" />
             </nav>
             <PrimaryButton
               href="/contact"

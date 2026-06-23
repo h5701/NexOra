@@ -80,13 +80,13 @@ export default function FikrLessPreview() {
   return (
     <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
       <div className="flex flex-col items-center px-4 py-6 md:py-8">
-        <div className="relative w-[min(248px,74vw)] md:w-[230px]">
+        <div className="surface-dark relative w-[min(248px,74vw)] rounded-[32px] !bg-transparent md:w-[230px]">
           <div className={`${CARD_DEPTH_CLASS} rounded-[32px] p-[7px]`}>
             <CardTopLine />
 
             <div className="overflow-hidden rounded-[26px] bg-black">
               <div className="flex items-center justify-between px-4 pb-1 pt-2">
-                <span className="text-[9px] font-medium text-[rgba(255,255,255,0.55)]">
+                <span className="text-2xs font-medium text-[rgba(255,255,255,0.55)]">
                   12:38
                 </span>
                 <span className="h-[18px] w-[72px] rounded-full bg-[var(--color-void)]" />
@@ -130,7 +130,7 @@ export default function FikrLessPreview() {
           <CarouselDots activeIndex={activeIndex} onSelect={scrollToSlide} />
         </div>
 
-        <p className="mt-3 text-[10px] font-medium tracking-[0.08em] text-[var(--color-text-muted)] uppercase">
+        <p className="mt-3 text-xs font-medium tracking-[0.08em] text-[var(--color-text-muted)] uppercase">
           Swipe to explore
         </p>
       </div>

@@ -1,39 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --color-void: #04061a;
-  --color-surface: #07091d;
-  --color-surface-alt: #030516;
-  --color-surface-raised: #0c0f28;
-  --color-border: rgba(255, 255, 255, 0.05);
-  --color-border-bright: rgba(255, 255, 255, 0.12);
-
-  --color-text-primary: #ede9f8;
-  --color-text-secondary: rgba(237, 233, 248, 0.42);
-  --color-text-muted: rgba(237, 233, 248, 0.22);
-
+  /* ============================================================
+     BRAND CONSTANTS — never change per surface
+     ============================================================ */
   --color-purple: #7b5ea7;
   --color-purple-dark: #5b4080;
   --color-purple-hover: #9170c2;
-  --color-purple-glow: rgba(123, 94, 167, 0.25);
+  --color-purple-glow: rgba(123, 94, 167, 0.22);
 
-  --color-cyan: #2dd4bf;
+  /* Raw navy/cyan kept for the dark surfaces + decorative glows. */
+  --color-void: #06081e;
+  --color-void-deep: #04061a;
+  --color-surface-alt-dark: #0a0c24;
+  /* Alias used by legacy section markup — maps to the light tint band */
+  --color-surface-alt: var(--color-tint);
+
+  /* ============================================================
+     DARK PALETTE  (applied inside .surface-dark)
+     ============================================================ */
+  --d-text-1: #f3f0fb;
+  --d-text-2: rgba(240, 236, 250, 0.72);
+  --d-text-3: rgba(240, 236, 250, 0.6);
+  --d-border: rgba(255, 255, 255, 0.1);
+  --d-border-bright: rgba(255, 255, 255, 0.16);
+  --d-card: #11142e;
+  --d-card-hover: #181c3d;
+  --d-card-border: rgba(255, 255, 255, 0.14);
+  --d-surface: #0b0e26;
+  --d-accent: #2dd4bf;
+  --d-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+  /* ============================================================
+     LIGHT PALETTE  (the default — most sections)
+     All text values WCAG-AA verified on #FAFAFB / #F1F0FA.
+     ============================================================ */
+  --color-page: #fafafb;
+  --color-tint: #f1f0fa;
+  --l-text-1: #16182b; /* 16.8:1 */
+  --l-text-2: #474a63; /* 8.3:1  */
+  --l-text-3: #5c5f77; /* 6.0:1  */
+  --l-border: rgba(22, 24, 43, 0.1);
+  --l-border-bright: rgba(22, 24, 43, 0.18);
+  --l-card: #ffffff;
+  --l-card-hover: #ffffff;
+  --l-card-border: rgba(22, 24, 43, 0.1);
+  --l-surface: #ffffff;
+  --l-accent: #6d28d9; /* violet, 6.8:1 */
+  --l-shadow: 0 1px 2px rgba(22, 24, 43, 0.04),
+    0 10px 30px -12px rgba(22, 24, 43, 0.16);
+
+  /* ============================================================
+     CONTEXTUAL TOKENS — default to LIGHT; .surface-dark flips them
+     ============================================================ */
+  --color-text-primary: var(--l-text-1);
+  --color-text-secondary: var(--l-text-2);
+  --color-text-muted: var(--l-text-3);
+  --color-text-faint: rgba(22, 24, 43, 0.4);
+  --color-border: var(--l-border);
+  --color-border-bright: var(--l-border-bright);
+  --color-card: var(--l-card);
+  --color-card-hover: var(--l-card-hover);
+  --color-card-border: var(--l-card-border);
+  --color-surface: var(--l-surface);
+  --color-field: #f3f3f8;
+  --color-accent: var(--l-accent);
+  --color-error: #dc2626;
+  /* Legacy alias: existing var(--color-cyan) link usages now follow the accent. */
+  --color-cyan: var(--l-accent);
   --color-cyan-glow: rgba(45, 212, 191, 0.08);
+  --shadow-card: var(--l-shadow);
+  /* Heading gradient: deep violet→blue on light (AA as text). */
+  --gradient-heading: linear-gradient(110deg, #7c3aed 0%, #5b5bd6 50%, #2563eb 100%);
 
-  --color-card: #11142e;
-  --color-card-hover: #181c3d;
-  --color-card-border: rgba(255, 255, 255, 0.14);
-  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.4);
-
-  --gradient-hero: linear-gradient(
-    110deg,
-    #c4a3e8 0%,
-    #7b9fe8 40%,
-    #2dd4bf 80%
-  );
+  /* ============================================================
+     STATIC GRADIENTS
+     ============================================================ */
+  --gradient-hero: linear-gradient(110deg, #c4a3e8 0%, #7b9fe8 40%, #2dd4bf 80%);
   --gradient-button: linear-gradient(135deg, #7b5ea7, #5b4080);
-  --gradient-logo: linear-gradient(110deg, #a07fd4, #2dd4bf);
-  --gradient-accent: linear-gradient(110deg, #a07fd4, #2dd4bf);
+  /* Logo "O" — deep on light surfaces; .surface-dark restores the pastel. */
+  --gradient-logo: linear-gradient(110deg, #7c3aed, #2563eb);
+  --gradient-accent: linear-gradient(110deg, #7c3aed, #2563eb);
   --gradient-line: linear-gradient(
     90deg,
     transparent,
@@ -43,22 +90,132 @@
   );
   --gradient-step-hover: linear-gradient(
     90deg,
-    rgba(123, 94, 167, 0.6),
-    rgba(45, 212, 191, 0.6)
+    rgba(124, 58, 237, 0.7),
+    rgba(37, 99, 235, 0.7)
   );
+  --gradient-card-top: linear-gradient(90deg, #7c3aed, #2563eb);
+
+  /* ============================================================
+     FLUID TYPE SCALE — rem + clamp(), 100% root preserved
+     ============================================================ */
+  --fs-2xs: clamp(0.5625rem, 0.52rem + 0.18vw, 0.625rem);
+  --fs-xs: clamp(0.625rem, 0.58rem + 0.22vw, 0.75rem);
+  --fs-caption: clamp(0.6875rem, 0.64rem + 0.24vw, 0.75rem);
+  --fs-sm: clamp(0.8125rem, 0.76rem + 0.28vw, 0.875rem);
+  --fs-md: clamp(0.9375rem, 0.86rem + 0.38vw, 1.0625rem);
+  --fs-base: clamp(1rem, 0.92rem + 0.45vw, 1.125rem);
+  --fs-lg: clamp(1.0625rem, 0.95rem + 0.55vw, 1.25rem);
+  --fs-xl: clamp(1.1875rem, 1.05rem + 0.7vw, 1.4375rem);
+  --fs-2xl: clamp(1.625rem, 1.2rem + 2vw, 2.125rem);
+  --fs-3xl: clamp(2.5rem, 1.75rem + 3.2vw, 3.375rem);
+  --fs-4xl: clamp(2.75rem, 2rem + 4vw, 3.5rem);
+  --fs-section: clamp(1.625rem, 1.1rem + 2.5vw, 2.75rem);
+  --fs-cta: clamp(1.5rem, 1.1rem + 2vw, 2.25rem);
+  --fs-logo: clamp(1rem, 0.92rem + 0.45vw, 1.0625rem);
+  --fs-quote-deco: clamp(2.25rem, 1.6rem + 2.5vw, 2.5rem);
+  --fs-quote-metric: clamp(2rem, 1.4rem + 2.2vw, 2.75rem);
+  --fs-display: clamp(1.75rem, 0.875rem + 5.5vw, 4.5rem);
+
+  /* Line-height ratios — unitless, scale with font-size */
+  --lh-display: 1.05;
+  --lh-headline: 1.08;
+  --lh-heading-tight: 1.02;
+  --lh-heading: 1.2;
+  --lh-body: 1.68;
+  --lh-body-relaxed: 1.72;
+  --lh-label: 1;
+}
+
+/* ==============================================================
+   SURFACE CONTEXTS — set background + flip the contextual tokens.
+   Children consume the tokens and adapt automatically.
+   ============================================================== */
+.surface-light {
+  background: var(--color-page);
+}
+
+.surface-tint {
+  background: var(--color-tint);
+}
+
+.surface-dark {
+  background: var(--color-void);
+  --color-text-primary: var(--d-text-1);
+  --color-text-secondary: var(--d-text-2);
+  --color-text-muted: var(--d-text-3);
+  --color-text-faint: rgba(240, 236, 250, 0.32);
+  --color-border: var(--d-border);
+  --color-border-bright: var(--d-border-bright);
+  --color-card: var(--d-card);
+  --color-card-hover: var(--d-card-hover);
+  --color-card-border: var(--d-card-border);
+  --color-surface: var(--d-surface);
+  --color-field: var(--d-surface);
+  --color-accent: var(--d-accent);
+  --color-error: #fca5a5;
+  --color-cyan: var(--d-accent);
+  --shadow-card: var(--d-shadow);
+  --gradient-heading: var(--gradient-hero);
+  --gradient-logo: linear-gradient(110deg, #a07fd4, #2dd4bf);
   --gradient-card-top: linear-gradient(
     90deg,
     var(--color-purple),
-    var(--color-cyan)
+    var(--d-accent)
   );
+}
+
+.surface-dark-deep {
+  background: var(--color-void-deep);
 }
 
 @theme inline {
   --font-sans: var(--font-body);
+
+  --text-2xs: var(--fs-2xs);
+  --text-2xs--line-height: var(--lh-label);
+  --text-xs: var(--fs-xs);
+  --text-xs--line-height: var(--lh-label);
+  --text-caption: var(--fs-caption);
+  --text-caption--line-height: var(--lh-label);
+  --text-sm: var(--fs-sm);
+  --text-sm--line-height: var(--lh-body);
+  --text-md: var(--fs-md);
+  --text-md--line-height: var(--lh-body-relaxed);
+  --text-base: var(--fs-base);
+  --text-base--line-height: var(--lh-body);
+  --text-lg: var(--fs-lg);
+  --text-lg--line-height: var(--lh-heading);
+  --text-xl: var(--fs-xl);
+  --text-xl--line-height: var(--lh-heading);
+  --text-2xl: var(--fs-2xl);
+  --text-2xl--line-height: var(--lh-headline);
+  --text-3xl: var(--fs-3xl);
+  --text-3xl--line-height: var(--lh-display);
+  --text-4xl: var(--fs-4xl);
+  --text-4xl--line-height: var(--lh-label);
+  --text-section: var(--fs-section);
+  --text-section--line-height: var(--lh-heading-tight);
+  --text-cta: var(--fs-cta);
+  --text-cta--line-height: var(--lh-headline);
+  --text-logo: var(--fs-logo);
+  --text-logo--line-height: var(--lh-label);
+  --text-display: var(--fs-display);
+  --text-display--line-height: var(--lh-display);
+  --text-quote-deco: var(--fs-quote-deco);
+  --text-quote-deco--line-height: var(--lh-label);
+  --text-quote-metric: var(--fs-quote-metric);
+  --text-quote-metric--line-height: var(--lh-label);
+
+  --leading-display: var(--lh-display);
+  --leading-headline: var(--lh-headline);
+  --leading-heading-tight: var(--lh-heading-tight);
+  --leading-heading: var(--lh-heading);
+  --leading-body: var(--lh-body);
+  --leading-body-relaxed: var(--lh-body-relaxed);
 }
 
 body {
-  background: var(--color-void);
+  background: var(--color-page);
   color: var(--color-text-primary);
   font-family: var(--font-body), sans-serif;
 }
@@ -74,12 +231,91 @@ body {
   }
 }
 
+/* Shared scroll-reveal: element starts hidden, animates once in view. */
+.reveal,
 .hero-reveal {
   opacity: 0;
+  will-change: opacity, transform;
 }
 
+.reveal.is-visible,
 .hero-reveal.is-visible {
-  animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Slow, ambient hero glow — drifts subtly. Gated by reduced-motion below. */
+@keyframes heroGlowDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translate3d(24px, 18px, 0) scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* Small "live" indicator dot — gentle breathing glow signals a shipped product. */
+@keyframes livePulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.55);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(45, 212, 191, 0);
+    opacity: 0.85;
+  }
+}
+
+.live-dot {
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background: var(--color-cyan);
+  animation: livePulse 2.2s ease-in-out infinite;
+}
+
+/* Global focus-visible ring — keyboard users get a clear, on-brand outline.
+   Uses the contextual accent (violet on light, cyan on dark). */
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respect users who prefer reduced motion: reveal instantly, kill drift/count. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .hero-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-glow {
+    animation: none !important;
+  }
+
+  .chat-launcher-idle,
+  .chat-message,
+  .chat-typing-dot {
+    animation: none !important;
+  }
 }
 
 @layer utilities {
@@ -92,23 +328,13 @@ body {
   }
 
   .text-headline-hero {
-    font-size: clamp(28px, 8vw, 68px);
-  }
-
-  @media (min-width: 768px) {
-    .text-headline-hero {
-      font-size: clamp(52px, 7vw, 72px);
-    }
+    font-size: var(--fs-display);
+    line-height: var(--lh-display);
   }
 
   .text-headline-section {
-    font-size: clamp(26px, 5.5vw, 44px);
-  }
-
-  @media (min-width: 768px) {
-    .text-headline-section {
-      font-size: clamp(32px, 4vw, 44px);
-    }
+    font-size: var(--fs-section);
+    line-height: var(--lh-heading-tight);
   }
 
   .stat-accent {
@@ -130,11 +356,21 @@ body {
   }
 
   .text-headline-cta {
-    font-size: clamp(24px, 5.5vw, 36px);
+    font-size: var(--fs-cta);
+    line-height: var(--lh-headline);
   }
 
   .gradient-hero-text {
     background-image: var(--gradient-hero);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Surface-aware gradient heading: pastel on dark, deep violet→blue on light. */
+  .text-gradient {
+    background-image: var(--gradient-heading);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -159,15 +395,33 @@ body {
 
   .card-depth-interactive {
     transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      transform 0.2s ease;
+      background 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .card-depth-interactive:hover {
-    transform: translateY(-1px);
-    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-purple) 45%, transparent);
     background: var(--color-card-hover);
+    box-shadow:
+      var(--shadow-card),
+      0 16px 42px -16px color-mix(in srgb, var(--color-purple) 50%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--color-purple) 16%, transparent);
+  }
+
+  /* Brand-gradient hairline that fades in along the card top on hover. */
+  .card-top-line {
+    transition: opacity 0.25s ease;
+  }
+
+  .card-depth-interactive .card-top-line {
+    opacity: 0.55;
+  }
+
+  .card-depth-interactive:hover .card-top-line {
+    opacity: 1;
   }
 
   .card-top-line {
@@ -186,7 +440,8 @@ body {
     background: var(--gradient-button);
     color: #ffffff;
     border-radius: 9px;
-    font-size: 14px;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-label);
     font-weight: 500;
     letter-spacing: 0.01em;
     box-shadow: 0 8px 32px var(--color-purple-glow);
@@ -197,7 +452,8 @@ body {
     background: var(--gradient-button);
     color: #ffffff;
     border-radius: 7px;
-    font-size: 13px;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-label);
     font-weight: 500;
   }
 
@@ -231,12 +487,21 @@ body {
     );
   }
 
+  /* Animated ambient glow behind the hero headline — slow, subtle drift. */
+  .hero-glow {
+    animation: heroGlowDrift 14s ease-in-out infinite;
+  }
+
+  .hero-glow-cyan {
+    animation: heroGlowDrift 18s ease-in-out infinite reverse;
+  }
+
   .service-tag-rule {
     display: block;
     height: 1px;
     width: 18px;
     flex-shrink: 0;
-    background: rgba(237, 233, 248, 0.12);
+    background: var(--color-border-bright);
   }
 
   .hero-pill {
@@ -246,11 +511,12 @@ body {
     border-radius: 9999px;
     border: 1px solid rgba(45, 212, 191, 0.2);
     padding: 6px 14px;
-    font-size: 11px;
+    font-size: var(--fs-caption);
+    line-height: var(--lh-label);
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--color-text-primary) 40%, transparent);
+    color: color-mix(in srgb, var(--color-text-primary) 62%, transparent);
   }
 
   .hero-pill-dot {
@@ -260,5 +526,200 @@ body {
     border-radius: 9999px;
     background: var(--color-cyan);
     box-shadow: 0 0 10px rgba(45, 212, 191, 0.8);
+  }
+
+  /* Dark gradient overlay for service hero images — keeps headline WCAG AA. */
+  .service-hero-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(4, 6, 26, 0.92) 0%,
+      rgba(6, 8, 30, 0.78) 45%,
+      rgba(6, 8, 30, 0.65) 100%
+    );
+  }
+
+  /* Brand gradient fallback when an Unsplash image fails to load. */
+  .service-image-fallback {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background: linear-gradient(
+      135deg,
+      var(--color-void-deep) 0%,
+      var(--color-purple-dark) 50%,
+      #1e3a5f 100%
+    );
+  }
+
+  /* Services mega-menu — hover-open panel with staggered entrance. */
+  .nav-mega-panel {
+    animation: navMegaPanelIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .nav-mega-panel::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    right: 0;
+    left: 0;
+    height: 14px;
+  }
+
+  .nav-mega-panel-inner {
+    position: relative;
+  }
+
+  .nav-mega-panel-inner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: clamp(24px, 5vw, 80px);
+    right: clamp(24px, 5vw, 80px);
+    height: 2px;
+    background: var(--gradient-card-top);
+    opacity: 0.85;
+  }
+
+  .nav-mega-column {
+    animation: navMegaColumnIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .nav-mega-link {
+    animation: navMegaLinkIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .nav-mega-footer {
+    animation: navMegaFooterIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  }
+
+  .nav-mobile-services {
+    animation: navMegaPanelIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .nav-mobile-services-group {
+    animation: navMegaColumnIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Chat widget */
+  .chat-launcher {
+    background: var(--gradient-button);
+  }
+
+  .chat-launcher-idle {
+    animation: chatLauncherPulse 3s ease-in-out infinite;
+  }
+
+  .chat-send-btn {
+    background: var(--gradient-button);
+  }
+
+  .chat-message {
+    animation: chatMessageIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .chat-typing-dot {
+    display: block;
+    height: 6px;
+    width: 6px;
+    border-radius: 9999px;
+    background: var(--color-text-muted);
+    animation: chatTypingBounce 1.2s ease-in-out infinite;
+  }
+
+  .chat-typing-dot:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .chat-typing-dot:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @media (max-width: 640px) {
+    .chat-panel-open {
+      inset: auto 0 0 0 !important;
+      right: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      max-height: min(88vh, 100dvh) !important;
+      border-radius: 1.25rem 1.25rem 0 0 !important;
+    }
+  }
+}
+
+@keyframes navMegaPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navMegaColumnIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navMegaLinkIn {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes navMegaFooterIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes chatLauncherPulse {
+  0%,
+  100% {
+    box-shadow: 0 12px 40px -8px rgba(123, 94, 167, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 12px 40px -8px rgba(123, 94, 167, 0.55),
+      0 0 0 6px rgba(123, 94, 167, 0.12);
+  }
+}
+
+@keyframes chatMessageIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chatTypingBounce {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
   }
 }

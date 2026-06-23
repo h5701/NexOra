@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Syne } from "next/font/google";
+import ChatWidget from "@/components/chatbot/ChatWidget";
 import ScrollProgressLine from "@/components/layout/ScrollProgressLine";
 import "./globals.css";
 
@@ -29,10 +30,15 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col overflow-x-hidden">
+      <body
+        className="flex min-h-full flex-col overflow-x-hidden"
+        suppressHydrationWarning
+      >
         <ScrollProgressLine />
         {children}
+        <ChatWidget />
       </body>
     </html>
   );

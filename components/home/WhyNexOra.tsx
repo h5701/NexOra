@@ -1,5 +1,6 @@
 import CardTopLine from "@/components/ui/CardTopLine";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
+import Reveal from "@/components/ui/Reveal";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
   CARD_BODY_PADDING_COMPACT_CLASS,
@@ -10,62 +11,61 @@ const cards = [
   {
     index: "01",
     title: "We don't overpromise",
-    body: "We'd rather decline a project than take it and underdeliver. Before we start, we align on scope, timeline, and budget — and we hold to it.",
+    body: "We'd rather decline a project than underdeliver. Scope, timeline, and budget agreed up front — then held to.",
   },
   {
     index: "02",
     title: "Full studio. One team.",
-    body: "Strategy, design, and development under one roof. No outsourcing, no handoff gaps, no miscommunication between moving parts.",
+    body: "Strategy, design, and build under one roof. No outsourcing, no handoff gaps.",
   },
   {
     index: "03",
     title: "Speed without shortcuts",
-    body: "We move fast because we plan properly — not because we cut corners. Every product we ship is built to last and built to scale.",
+    body: "We move fast because we plan properly. Architecture and scope agreed before build starts.",
   },
 ];
 
 export default function WhyNexOra({
-  background = "surface-alt",
+  surface = "light",
 }: {
-  background?: "void" | "surface-alt";
+  surface?: "light" | "tint";
 }) {
-  const bgClass =
-    background === "void"
-      ? "bg-[var(--color-void)]"
-      : "bg-[var(--color-surface-alt)]";
+  const bgClass = surface === "tint" ? "surface-tint" : "surface-light";
 
   return (
     <section
-      className={`section-py scroll-mt-[100px] overflow-hidden border-t border-[var(--color-border)] ${bgClass}`}
+      className={`section-py scroll-mt-[100px] overflow-hidden ${bgClass}`}
     >
       <div className={PAGE_CONTAINER_CLASS}>
         <EyebrowLabel>Why NexOra</EyebrowLabel>
 
-        <h2 className="text-headline-section mt-[14px] text-left font-[family-name:var(--font-display)] font-bold leading-[1.02] tracking-[-0.03em] text-[var(--color-text-primary)]">
-          A studio that treats your product like it&apos;s our own.
+        <h2 className="text-headline-section mt-[14px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
+          Small team. Full stack. No handoffs.
         </h2>
 
         <div className="mt-[52px]">
           <div className="grid grid-cols-1 gap-[14px] md:grid-cols-3">
-            {cards.map((card) => (
-              <article
+            {cards.map((card, index) => (
+              <Reveal
+                as="article"
                 key={card.index}
+                delay={index * 0.07}
                 className={`${CARD_DEPTH_INTERACTIVE_CLASS} ${CARD_BODY_PADDING_COMPACT_CLASS}`}
               >
                 <CardTopLine />
 
-                <p className="mb-[18px] font-[family-name:var(--font-display)] text-[11px] font-semibold tracking-[0.12em] text-[rgba(123,94,167,0.5)] uppercase">
+                <p className="mb-[18px] font-[family-name:var(--font-display)] text-caption font-semibold tracking-[0.12em] text-[rgba(123,94,167,0.5)] uppercase">
                   {card.index}
                 </p>
 
-                <h3 className="mb-3 font-[family-name:var(--font-display)] text-[17px] font-semibold leading-[1.2] tracking-[-0.01em] text-[var(--color-text-primary)]">
+                <h3 className="mb-3 font-[family-name:var(--font-display)] text-lg font-semibold leading-heading tracking-[-0.01em] text-[var(--color-text-primary)]">
                   {card.title}
                 </h3>
 
-                <p className="text-[12px] font-light leading-[1.7] text-[var(--color-text-secondary)]">
+                <p className="text-sm font-light leading-body text-[var(--color-text-secondary)]">
                   {card.body}
                 </p>
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import DepthCard from "@/components/ui/DepthCard";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { CONTACT_EMAIL, CONTACT_PROJECT_TYPES } from "@/lib/constants";
 import { CARD_BODY_PADDING_CLASS } from "@/lib/styles";
 
 type ContactFormValues = {
@@ -14,23 +14,23 @@ type ContactFormValues = {
   description: string;
 };
 
-const projectTypes = [
-  "Web Platform",
-  "Mobile App",
-  "Website",
-  "AI Integration",
-  "Other",
-];
-
 const fieldClassName =
-  "w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 font-[family-name:var(--font-body)] text-sm text-[var(--color-text-primary)] transition-[border-color] duration-150 outline-none focus:border-[var(--color-cyan)]";
+  "w-full rounded-lg border border-[var(--color-border-bright)] bg-[var(--color-field)] px-4 py-3 font-[family-name:var(--font-body)] text-md text-[var(--color-text-primary)] transition-[border-color,box-shadow] duration-150 outline-none focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-accent)_18%,transparent)]";
 
 const labelClassName =
-  "mb-1.5 block text-xs font-medium text-[var(--color-text-muted)]";
+  "mb-1.5 block text-sm font-medium text-[var(--color-text-secondary)]";
 
-export default function ContactForm() {
+export default function ContactForm({
+  defaultProjectType = "Web Platform",
+}: {
+  defaultProjectType?: string;
+}) {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const resolvedDefault =
+    CONTACT_PROJECT_TYPES.find((type) => type === defaultProjectType) ??
+    "Other";
 
   const {
     register,
@@ -42,7 +42,7 @@ export default function ContactForm() {
       name: "",
       email: "",
       company: "",
-      projectType: "Web Platform",
+      projectType: resolvedDefault,
       description: "",
     },
   });
@@ -80,10 +80,10 @@ export default function ContactForm() {
       <DepthCard className={CARD_BODY_PADDING_CLASS} interactive={false}>
         {submitted ? (
           <div className="py-6 text-center">
-            <p className="font-[family-name:var(--font-display)] text-[22px] font-semibold text-[var(--color-text-primary)]">
+            <p className="font-[family-name:var(--font-display)] text-xl font-semibold text-[var(--color-text-primary)]">
               Project received.
             </p>
-            <p className="mt-3 text-sm font-light leading-[1.68] text-[var(--color-text-secondary)]">
+            <p className="mt-3 text-sm font-light leading-body text-[var(--color-text-secondary)]">
               We&apos;ll respond within 2 business days with clarity on scope,
               direction, and next steps.
             </p>
@@ -108,7 +108,7 @@ export default function ContactForm() {
                 {...register("name", { required: "Name is required" })}
               />
               {errors.name && (
-                <p className="mt-1.5 text-xs text-[var(--color-cyan)]">
+                <p className="mt-1.5 text-sm text-[var(--color-error)]">
                   {errors.name.message}
                 </p>
               )}
@@ -131,7 +131,7 @@ export default function ContactForm() {
                 })}
               />
               {errors.email && (
-                <p className="mt-1.5 text-xs text-[var(--color-cyan)]">
+                <p className="mt-1.5 text-sm text-[var(--color-error)]">
                   {errors.email.message}
                 </p>
               )}
@@ -160,7 +160,7 @@ export default function ContactForm() {
                   required: "Project type is required",
                 })}
               >
-                {projectTypes.map((type) => (
+                {CONTACT_PROJECT_TYPES.map((type) => (
                   <option key={type} value={type}>
                     {type}
                   </option>
@@ -186,14 +186,14 @@ export default function ContactForm() {
                 })}
               />
               {errors.description && (
-                <p className="mt-1.5 text-xs text-[var(--color-cyan)]">
+                <p className="mt-1.5 text-sm text-[var(--color-error)]">
                   {errors.description.message}
                 </p>
               )}
             </div>
 
             {submitError && (
-              <p className="text-sm text-[var(--color-cyan)]">{submitError}</p>
+              <p className="text-sm text-[var(--color-error)]">{submitError}</p>
             )}
 
             <button
@@ -207,7 +207,7 @@ export default function ContactForm() {
         )}
       </DepthCard>
 
-      <p className="mt-6 text-sm font-light leading-[1.68] text-[var(--color-text-secondary)]">
+      <p className="mt-6 text-sm font-light leading-body text-[var(--color-text-secondary)]">
         Projects typically start from £750. We&apos;ll confirm scope and budget
         in our first response.
       </p>

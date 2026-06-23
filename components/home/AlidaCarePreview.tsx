@@ -22,6 +22,7 @@ export default function AlidaCarePreview() {
         images={alidaImages}
         scrollable
         showScrollHint
+        viewportHeights="h-[260px] sm:h-[330px] md:h-[390px]"
       />
     </div>
   );

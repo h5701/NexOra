@@ -8,7 +8,11 @@ import CardTopLine from "@/components/ui/CardTopLine";
 import HeroOrbs from "@/components/ui/HeroOrbs";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
-import { CARD_DEPTH_CLASS } from "@/lib/styles";
+import {
+  CARD_DEPTH_CLASS,
+  SECTION_DARK_CLASS,
+  SECTION_TINT_CLASS,
+} from "@/lib/styles";
 
 type CaseStudyImage = {
   src: string;
@@ -129,10 +133,10 @@ function CaseStudySectionBlock({
   background,
 }: {
   section: CaseStudySection;
-  background: "void" | "surface-alt";
+  background: "void" | "tint";
 }) {
   const proseBlock = (
-    <div className="space-y-5 text-[13px] font-light leading-[1.68] text-[var(--color-text-secondary)]">
+    <div className="space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]">
       {section.body && <p>{section.body}</p>}
       {section.listIntro && <p>{section.listIntro}</p>}
       {section.listItems && section.listItems.length > 0 && (
@@ -154,9 +158,7 @@ function CaseStudySectionBlock({
   return (
     <section
       className={`section-py scroll-mt-[100px] border-t border-[var(--color-border)] ${
-        background === "void"
-          ? "bg-[var(--color-void)]"
-          : "bg-[var(--color-surface-alt)]"
+        background === "void" ? SECTION_DARK_CLASS : SECTION_TINT_CLASS
       }`}
     >
       <div className={PAGE_CONTAINER_CLASS}>
@@ -168,10 +170,10 @@ function CaseStudySectionBlock({
 }
 
 export default function CaseStudyPage({ content }: { content: CaseStudyContent }) {
-  const sectionBackgrounds: Array<"void" | "surface-alt"> = [
-    "surface-alt",
+  const sectionBackgrounds: Array<"void" | "tint"> = [
+    "tint",
     "void",
-    "surface-alt",
+    "tint",
     "void",
   ];
 
@@ -185,7 +187,7 @@ export default function CaseStudyPage({ content }: { content: CaseStudyContent }
     <>
       <Navbar />
       <main style={accentStyle}>
-        <section className="relative scroll-mt-[100px] overflow-hidden bg-[var(--color-void)]">
+        <section className={`relative scroll-mt-[100px] overflow-hidden ${SECTION_DARK_CLASS} border-t-0`}>
           <HeroOrbs />
 
           <div className={`relative ${PAGE_CONTAINER_CLASS} pb-14 pt-[calc(3.5rem+65px)] md:pb-24 md:pt-[calc(96px+65px)]`}>
@@ -206,10 +208,10 @@ export default function CaseStudyPage({ content }: { content: CaseStudyContent }
               {content.eyebrow}
             </div>
 
-            <h1 className="text-headline-section mt-[14px] text-left font-[family-name:var(--font-display)] font-bold leading-[1.02] tracking-[-0.03em] text-[var(--color-text-primary)]">
+            <h1 className="text-headline-section mt-[14px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
               {content.title}
             </h1>
-            <p className="mt-5 max-w-[560px] text-base font-light leading-[1.72] text-[var(--color-text-secondary)]">
+            <p className="mt-5 max-w-[560px] text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
               {content.subtitle}
             </p>
 
@@ -239,13 +241,13 @@ export default function CaseStudyPage({ content }: { content: CaseStudyContent }
           background={sectionBackgrounds[3]}
         />
 
-        <section className="section-py scroll-mt-[100px] border-t border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+        <section className={`section-py scroll-mt-[100px] border-t border-[var(--color-border)] ${SECTION_TINT_CLASS}`}>
           <div className={`${PAGE_CONTAINER_CLASS} flex justify-center`}>
             <a
               href={content.externalLink.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-[9px] border border-[var(--color-card-border)] bg-transparent px-[26px] py-[13px] text-[14px] font-medium text-[var(--color-text-primary)] no-underline transition-[border-color,color,transform] duration-150 hover:-translate-y-px hover:border-[color-mix(in_srgb,var(--case-accent)_55%,transparent)] hover:text-[var(--case-accent)]"
+              className="inline-flex items-center gap-2 rounded-[9px] border border-[var(--color-card-border)] bg-transparent px-[26px] py-[13px] text-sm font-medium text-[var(--color-text-primary)] no-underline transition-[border-color,color,transform] duration-150 hover:-translate-y-px hover:border-[color-mix(in_srgb,var(--case-accent)_55%,transparent)] hover:text-[var(--case-accent)]"
             >
               {content.externalLink.label}
             </a>

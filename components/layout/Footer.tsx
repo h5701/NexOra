@@ -8,7 +8,7 @@ import {
 } from "@/lib/constants";
 
 const columnHeadingClass =
-  "text-[11px] font-medium uppercase tracking-[0.1em] text-[var(--color-text-muted)]";
+  "text-caption font-medium uppercase tracking-[0.1em] text-[var(--color-text-muted)]";
 
 const footerLinkClass =
   "text-sm text-[var(--color-text-secondary)] transition-colors duration-150 hover:text-[var(--color-text-primary)]";
@@ -57,12 +57,15 @@ function LinkedInIcon() {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-surface-alt)] pt-16 pb-10">
+    <footer
+      className="surface-dark border-t border-[var(--color-border)] pt-16 pb-10"
+      style={{ background: "var(--color-void-deep)" }}
+    >
       <div className={PAGE_CONTAINER_CLASS}>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
             <Logo iconClassName="mr-2 h-7 w-auto" />
-            <p className="mt-4 max-w-[260px] text-sm font-light leading-[1.68] text-[var(--color-text-secondary)]">
+            <p className="mt-4 max-w-[260px] text-sm font-light leading-body text-[var(--color-text-secondary)]">
               We build digital products that work in the real world.
             </p>
           </div>

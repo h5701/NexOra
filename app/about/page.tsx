@@ -9,6 +9,9 @@ import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
   CARD_BODY_PADDING_COMPACT_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
+  SECTION_DARK_CLASS,
+  SECTION_HERO_DARK_CLASS,
+  SECTION_TINT_CLASS,
 } from "@/lib/styles";
 
 export const metadata: Metadata = {
@@ -51,7 +54,7 @@ export default function AboutPage() {
     <>
       <Navbar />
       <main>
-        <section className="relative scroll-mt-[100px] overflow-hidden bg-[var(--color-void)]">
+        <section className={SECTION_HERO_DARK_CLASS}>
           <HeroOrbs />
 
           <div className={`page-hero-py relative ${PAGE_CONTAINER_CLASS}`}>
@@ -69,11 +72,11 @@ export default function AboutPage() {
           />
         </section>
 
-        <section className="section-py scroll-mt-[100px] border-t border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+        <section className={`section-py ${SECTION_TINT_CLASS}`}>
           <div className={PAGE_CONTAINER_CLASS}>
             <SectionHeader eyebrow="Our story" title="Why we built NexOra" />
 
-            <div className="mt-[52px] max-w-[640px] space-y-5 text-[13px] font-light leading-[1.68] text-[var(--color-text-secondary)]">
+            <div className="mt-[52px] max-w-[640px] space-y-5 text-sm font-light leading-body text-[var(--color-text-secondary)]">
               <p>
                 NexOra was created from a simple frustration: most development
                 studios either overpromise, underdeliver, or fail to understand
@@ -98,7 +101,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="section-py scroll-mt-[100px] border-t border-[var(--color-border)] bg-[var(--color-void)]">
+        <section className={`section-py ${SECTION_DARK_CLASS}`}>
           <div className={PAGE_CONTAINER_CLASS}>
             <SectionHeader
               eyebrow="Founders"
@@ -117,20 +120,20 @@ export default function AboutPage() {
                     {founder.initials}
                   </div>
 
-                  <h3 className="font-[family-name:var(--font-display)] text-[18px] font-semibold text-[var(--color-text-primary)]">
+                  <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--color-text-primary)]">
                     {founder.name}
                   </h3>
 
-                  <p className="mt-2 text-[11px] font-medium tracking-[0.1em] text-[var(--color-cyan)] uppercase">
+                  <p className="mt-2 text-caption font-medium tracking-[0.1em] text-[var(--color-cyan)] uppercase">
                     {founder.role}
                   </p>
 
-                  <p className="mt-4 text-[13px] font-light leading-[1.68] text-[var(--color-text-secondary)]">
+                  <p className="mt-4 text-sm font-light leading-body text-[var(--color-text-secondary)]">
                     {founder.body}
                   </p>
 
                   {founder.showStrengthsLabel && (
-                    <p className="mt-6 text-[10px] font-medium tracking-[0.1em] text-[var(--color-text-muted)] uppercase">
+                    <p className="mt-6 text-xs font-medium tracking-[0.1em] text-[var(--color-text-muted)] uppercase">
                       Key strengths
                     </p>
                   )}
@@ -141,7 +144,7 @@ export default function AboutPage() {
                     {founder.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-[var(--color-border)] px-[10px] py-1 text-[10px] font-medium tracking-[0.07em] text-[var(--color-text-muted)] uppercase"
+                        className="rounded-full border border-[var(--color-border)] px-[10px] py-1 text-xs font-medium tracking-[0.07em] text-[var(--color-text-muted)] uppercase"
                       >
                         {tag}
                       </span>
@@ -153,12 +156,12 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="section-py scroll-mt-[100px] border-t border-[var(--color-border)] bg-[var(--color-surface-alt)]">
+        <section className={`section-py ${SECTION_TINT_CLASS}`}>
           <div className={`${PAGE_CONTAINER_CLASS} max-w-[760px] text-center`}>
-            <p className="text-[10px] font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase">
+            <p className="text-xs font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase">
               Our mission
             </p>
-            <p className="text-headline-section mt-[14px] font-[family-name:var(--font-display)] font-bold leading-[1.08] tracking-[-0.03em] text-[var(--color-text-primary)]">
+            <p className="text-headline-section mt-[14px] font-[family-name:var(--font-display)] font-bold leading-headline tracking-[-0.03em] text-[var(--color-text-primary)]">
               We exist to bridge the gap between ideas and real-world execution.
             </p>
           </div>

@@ -11,7 +11,7 @@ export default function Logo({
   return (
     <Link
       href="/"
-      className="flex items-center font-[family-name:var(--font-display)] text-[17px] font-bold leading-none tracking-normal"
+      className="flex items-center font-[family-name:var(--font-display)] text-logo font-bold leading-none tracking-normal"
       onClick={onClick}
     >
       <Image
