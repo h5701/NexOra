@@ -6,7 +6,7 @@ import {
   PORTFOLIO_LEAD,
 } from "@/lib/content/site-copy";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
-import { MT_SPACE_4, MT_SPACE_SECTION } from "@/lib/styles";
+import { MT_SPACE_4, MT_SPACE_SECTION, MT_LEAD } from "@/lib/styles";
 
 export default function Portfolio() {
   return (
@@ -23,7 +23,7 @@ export default function Portfolio() {
           {PORTFOLIO_HEADLINE}
         </h2>
 
-        <p className="mt-4 max-w-[480px] text-md font-light leading-body text-[var(--color-text-secondary)]">
+        <p className={`${MT_LEAD} max-w-[480px] text-base font-light leading-body text-[var(--color-text-secondary)]`}>
           {PORTFOLIO_LEAD}
         </p>
 

@@ -39,7 +39,7 @@ export default function DarkPageHero({
         </Reveal>
 
         <Reveal delay={0.08}>
-          <h1 className="text-headline-hero max-w-full font-[family-name:var(--font-display)] font-extrabold tracking-[-0.04em] md:tracking-[-0.045em]">
+          <h1 className="text-headline-hero max-w-[14ch] font-[family-name:var(--font-display)] font-extrabold tracking-[-0.04em] md:max-w-[18ch] md:tracking-[-0.045em]">
             {title}
           </h1>
         </Reveal>
@@ -80,8 +80,10 @@ export function GradientHeroTitle({ text }: { text: string }) {
 
   return (
     <>
-      <span className="block text-[var(--color-text-primary)]">{lead}</span>
-      <span className="gradient-hero-text block">{accent}</span>
+      <span className="block text-balance text-[var(--color-text-primary)]">
+        {lead}
+      </span>
+      <span className="gradient-hero-text mt-1 block text-balance">{accent}</span>
     </>
   );
 }

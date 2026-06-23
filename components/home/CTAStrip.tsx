@@ -5,7 +5,7 @@ import { MT_SPACE_4 } from "@/lib/styles";
 
 export default function CTAStrip() {
   return (
-    <section className="section-py surface-dark relative scroll-mt-[100px] overflow-hidden">
+    <section className="section-py surface-dark relative scroll-mt-[100px] overflow-x-hidden">
       <HeroBackdrop src="/textures/grain-violet.webp" scrim="strong" />
 
       {/* Soft brand glow centered behind the closing ask. */}
@@ -18,17 +18,19 @@ export default function CTAStrip() {
         aria-hidden="true"
       />
 
-      <Reveal className="relative mx-auto flex max-w-[600px] flex-col items-center px-[clamp(24px,5vw,80px)] text-center">
+      <Reveal className="relative mx-auto flex max-w-[600px] flex-col items-center px-[clamp(24px,5vw,80px)] py-1 text-center">
         <p className="text-xs font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase">
           What&apos;s next
         </p>
 
-        <h2 className={`text-headline-cta mx-auto ${MT_SPACE_4} w-full max-w-[520px] font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}>
-          <span className="block">We&apos;re selective about</span>
-          <span className="block">the projects we take on.</span>
+        <h2
+          className={`text-headline-cta mx-auto ${MT_SPACE_4} w-full max-w-[560px] font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}
+        >
+          <span className="block text-balance">We&apos;re selective about</span>
+          <span className="mt-1 block text-balance">the projects we take on.</span>
         </h2>
 
-        <p className="mt-4 text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
+        <p className="mt-4 max-w-[480px] text-balance text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
           If you have something worth building, let&apos;s talk.
         </p>
 

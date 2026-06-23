@@ -13,6 +13,7 @@ import {
 } from "react";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { CHAT_STARTER_PROMPTS } from "@/lib/chatbot/constants";
+import ChatRobotIcon from "@/components/chatbot/ChatRobotIcon";
 import type { ChatMessage } from "@/components/chatbot/types";
 
 function createId() {
@@ -78,6 +79,7 @@ export default function ChatWidget() {
   const panelId = useId();
   const inputId = useId();
   const [open, setOpen] = useState(false);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [streaming, setStreaming] = useState(false);
@@ -97,6 +99,40 @@ export default function ChatWidget() {
   useEffect(() => {
     if (open) scrollToBottom();
   }, [messages, open, streaming, scrollToBottom]);
+
+  useEffect(() => {
+    if (!open) {
+      setKeyboardOpen(false);
+      document.documentElement.style.removeProperty("--chat-keyboard-offset");
+      return;
+    }
+
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    const syncKeyboardOffset = () => {
+      const offset = Math.max(
+        0,
+        window.innerHeight - viewport.height - viewport.offsetTop
+      );
+      const isKeyboard = offset > 80;
+      setKeyboardOpen(isKeyboard);
+      document.documentElement.style.setProperty(
+        "--chat-keyboard-offset",
+        `${offset}px`
+      );
+    };
+
+    syncKeyboardOffset();
+    viewport.addEventListener("resize", syncKeyboardOffset);
+    viewport.addEventListener("scroll", syncKeyboardOffset);
+
+    return () => {
+      viewport.removeEventListener("resize", syncKeyboardOffset);
+      viewport.removeEventListener("scroll", syncKeyboardOffset);
+      document.documentElement.style.removeProperty("--chat-keyboard-offset");
+    };
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -268,11 +304,11 @@ export default function ChatWidget() {
           aria-modal="true"
           aria-label="NexOra AI assistant"
           aria-hidden={!open}
-          className={`chat-panel pointer-events-auto fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(5.5rem,calc(1.5rem+env(safe-area-inset-bottom)))] flex w-[min(100vw-2rem,400px)] flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[color-mix(in_srgb,white_97%,transparent)] shadow-[0_24px_64px_-24px_rgba(22,24,43,0.45)] backdrop-blur-[16px] motion-safe:transition-[opacity,transform] motion-safe:duration-300 motion-safe:ease-out md:bottom-[max(1.5rem,env(safe-area-inset-bottom))] ${
+          className={`chat-panel pointer-events-auto fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(5.5rem,calc(1.5rem+env(safe-area-inset-bottom)))] flex w-[min(100vw-2rem,400px)] flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[color-mix(in_srgb,white_97%,transparent)] shadow-[0_24px_64px_-24px_rgba(22,24,43,0.45)] backdrop-blur-[16px] motion-safe:transition-[opacity,transform,max-height] motion-safe:duration-300 motion-safe:ease-out md:bottom-[max(1.5rem,env(safe-area-inset-bottom))] ${
             open
               ? "chat-panel-open translate-y-0 opacity-100"
               : "pointer-events-none translate-y-3 opacity-0"
-          }`}
+          } ${keyboardOpen ? "chat-panel-keyboard-open" : ""}`}
           style={{ maxHeight: "min(72vh, 640px)" }}
         >
           <header className="flex items-center gap-3 border-b border-[var(--color-border)] px-4 py-3">
@@ -369,7 +405,7 @@ export default function ChatWidget() {
 
           <form
             onSubmit={onSubmit}
-            className="border-t border-[var(--color-border)] px-3 py-3"
+            className="border-t border-[var(--color-border)] px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
           >
             {error && (
               <p className="mb-2 text-xs text-[var(--color-error)]" role="alert">
@@ -389,13 +425,13 @@ export default function ChatWidget() {
                 onKeyDown={onInputKeyDown}
                 disabled={streaming}
                 placeholder="Ask about our services…"
-                className="max-h-28 min-h-[42px] flex-1 resize-none rounded-xl border border-[var(--color-border-bright)] bg-[var(--color-field)] px-3 py-2.5 text-sm text-[var(--color-text-primary)] outline-none transition-[border-color,box-shadow] focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-accent)_18%,transparent)] disabled:opacity-60"
+                className="max-h-28 min-h-[48px] flex-1 resize-none rounded-xl border border-[var(--color-border-bright)] bg-[var(--color-field)] px-3 py-3 text-base text-[var(--color-text-primary)] outline-none transition-[border-color,box-shadow] focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-accent)_18%,transparent)] disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={streaming || !input.trim()}
                 aria-label="Send message"
-                className="chat-send-btn flex h-[42px] w-[42px] shrink-0 items-center justify-center rounded-xl border-0 text-white transition-[opacity,transform] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                className="chat-send-btn flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-0 text-white transition-[opacity,transform] hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                   <path
@@ -408,46 +444,27 @@ export default function ChatWidget() {
                 </svg>
               </button>
             </div>
-            <p className="mt-2 text-center text-[10px] text-[var(--color-text-muted)]">
-              Powered by Groq · Answers based on NexOra site content
-            </p>
           </form>
         </div>
+      </div>
 
+      <div
+        className={`chat-launcher-wrap pointer-events-auto fixed right-[max(1.25rem,env(safe-area-inset-right))] bottom-[max(1.5rem,env(safe-area-inset-bottom))] z-[91] motion-safe:transition-[transform,opacity] motion-safe:duration-300 ${
+          open ? "pointer-events-none scale-95 opacity-0" : ""
+        }`}
+      >
         <button
           ref={launcherRef}
           type="button"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => setOpen(true)}
           aria-expanded={open}
           aria-controls={panelId}
-          aria-label={open ? "Close NexOra assistant" : "Open NexOra assistant"}
-          className={`chat-launcher pointer-events-auto fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-[91] flex h-14 w-14 items-center justify-center rounded-full border-0 text-white shadow-[0_12px_40px_-8px_rgba(123,94,167,0.55)] motion-safe:transition-[transform,box-shadow] motion-safe:duration-300 hover:scale-105 hover:shadow-[0_16px_48px_-8px_rgba(123,94,167,0.65)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cyan)] ${
-            open ? "chat-launcher-active scale-95" : "chat-launcher-idle"
+          aria-label="Open NexOra assistant"
+          className={`chat-launcher flex h-14 w-14 items-center justify-center rounded-full border-0 text-white motion-safe:transition-[transform,box-shadow] motion-safe:duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cyan)] ${
+            open ? "" : "chat-launcher-idle"
           }`}
         >
-          {open ? (
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-              <path
-                d="M5 5L17 17M17 5L5 17"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-              />
-            </svg>
-          ) : (
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-              <path
-                d="M4 6.5C4 5.12 5.12 4 6.5 4h9c1.38 0 2.5 1.12 2.5 2.5v6c0 1.38-1.12 2.5-2.5 2.5H9l-4.5 3v-3.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle cx="8.25" cy="10" r="0.85" fill="currentColor" />
-              <circle cx="11.5" cy="10" r="0.85" fill="currentColor" />
-              <circle cx="14.75" cy="10" r="0.85" fill="currentColor" />
-            </svg>
-          )}
+          <ChatRobotIcon className="h-7 w-7" />
         </button>
       </div>
     </>

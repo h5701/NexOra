@@ -15,7 +15,7 @@ type ContactFormValues = {
 };
 
 const fieldClassName =
-  "w-full rounded-lg border border-[var(--color-border-bright)] bg-[var(--color-field)] px-4 py-3 font-[family-name:var(--font-body)] text-md text-[var(--color-text-primary)] transition-[border-color,box-shadow] duration-150 outline-none focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-accent)_18%,transparent)]";
+  "w-full min-h-[48px] rounded-lg border border-[var(--color-border-bright)] bg-[var(--color-field)] px-4 py-3 font-[family-name:var(--font-body)] text-base text-[var(--color-text-primary)] transition-[border-color,box-shadow] duration-150 outline-none focus:border-[var(--color-accent)] focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-accent)_18%,transparent)]";
 
 const labelClassName =
   "mb-1.5 block text-sm font-medium text-[var(--color-text-secondary)]";
@@ -199,7 +199,7 @@ export default function ContactForm({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-primary inline-flex items-center border-0 transition-[opacity,transform] duration-150 hover:opacity-[0.88] hover:-translate-y-px active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn-primary inline-flex w-full items-center justify-center border-0 transition-[opacity,transform] duration-150 hover:opacity-[0.88] hover:-translate-y-px active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               {isSubmitting ? "Submitting..." : "Submit project →"}
             </button>

@@ -40,7 +40,7 @@ export default function ServiceImageFigure({
   priority?: boolean;
 }) {
   return (
-    <figure className="overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] lg:sticky lg:top-[120px]">
+    <figure className="w-full overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-card)] shadow-[var(--shadow-card)] lg:sticky lg:top-[120px]">
       <div className="relative aspect-[4/3] overflow-hidden">
         <ServiceImage
           image={image}

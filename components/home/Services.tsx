@@ -1,7 +1,9 @@
 import Link from "next/link";
 import CardTopLine from "@/components/ui/CardTopLine";
+import CardTagRow from "@/components/ui/CardTagRow";
 import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import Reveal from "@/components/ui/Reveal";
+import TierBadge from "@/components/services/TierBadge";
 import { homeBuildServices } from "@/lib/services";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
@@ -12,28 +14,6 @@ import {
   MT_SPACE_SECTION,
 } from "@/lib/styles";
 
-function TierBadge({
-  tier,
-  label,
-}: {
-  tier: "available" | "soon";
-  label: string;
-}) {
-  if (tier === "available") {
-    return (
-      <span className="ml-auto shrink-0 rounded-full border border-[color-mix(in_srgb,var(--color-cyan)_45%,transparent)] bg-[color-mix(in_srgb,var(--color-cyan)_8%,transparent)] px-2 py-0.5 text-xs font-medium tracking-[0.06em] text-[var(--color-cyan)]">
-        {label}
-      </span>
-    );
-  }
-
-  return (
-    <span className="ml-auto shrink-0 rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs font-medium tracking-[0.06em] text-[var(--color-text-muted)]">
-      {label}
-    </span>
-  );
-}
-
 export default function Services() {
   return (
     <section className="section-py surface-tint scroll-mt-[100px] overflow-hidden">
@@ -41,7 +21,7 @@ export default function Services() {
         <EyebrowLabel>What we build</EyebrowLabel>
 
         <div className={`${MT_SPACE_4} flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between`}>
-          <h2 className="text-headline-section text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
+          <h2 className="text-headline-section max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
             Platforms, AI, and infrastructure — shipped properly.
           </h2>
           <Link
@@ -69,13 +49,14 @@ export default function Services() {
               >
                 <CardTopLine />
 
-                <div className="mb-[22px] flex items-center gap-2 text-xs font-medium tracking-[0.1em] text-[var(--color-text-muted)] uppercase">
-                  <span className="service-tag-rule" aria-hidden="true" />
-                  <span className="min-w-0 truncate">{service.tag}</span>
-                  {service.tier && service.tierLabel && (
-                    <TierBadge tier={service.tier} label={service.tierLabel} />
-                  )}
-                </div>
+                <CardTagRow
+                  tag={service.tag}
+                  badge={
+                    service.tier && service.tierLabel ? (
+                      <TierBadge tier={service.tier} label={service.tierLabel} />
+                    ) : undefined
+                  }
+                />
 
                 <h3 className="font-[family-name:var(--font-display)] text-xl font-semibold leading-heading tracking-[-0.015em] text-[var(--color-text-primary)]">
                   {service.title}

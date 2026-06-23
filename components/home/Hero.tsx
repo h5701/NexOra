@@ -31,11 +31,13 @@ export default function Hero() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <h1 className="text-headline-hero max-w-full font-[family-name:var(--font-display)] font-extrabold tracking-[-0.04em] md:tracking-[-0.045em]">
-            <span className="block text-[var(--color-text-primary)]">
+          <h1 className="text-headline-hero max-w-[14ch] font-[family-name:var(--font-display)] font-extrabold tracking-[-0.04em] md:max-w-[16ch] md:tracking-[-0.045em]">
+            <span className="block text-balance text-[var(--color-text-primary)]">
               We build digital
             </span>
-            <span className="gradient-hero-text block">products that work.</span>
+            <span className="gradient-hero-text mt-1 block text-balance">
+              products that work.
+            </span>
           </h1>
         </Reveal>
 

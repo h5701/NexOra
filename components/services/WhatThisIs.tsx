@@ -13,7 +13,7 @@ export default function WhatThisIs({ paragraphs, image }: WhatThisIsProps) {
   return (
     <section className={`section-py ${SECTION_TINT_CLASS}`}>
       <div className={PAGE_CONTAINER_CLASS}>
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
           <div>
             <SectionHeader eyebrow="Overview" title="What this is" />
             <div

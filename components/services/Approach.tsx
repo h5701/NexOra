@@ -40,8 +40,8 @@ export default function Approach({
   return (
     <section className={`section-py ${SECTION_TINT_CLASS}`}>
       <div className={PAGE_CONTAINER_CLASS}>
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
-          <div className={imageOnLeft ? "lg:order-2" : undefined}>
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
+          <div className={imageOnLeft ? "lg:order-2" : "order-1"}>
             <SectionHeader
               eyebrow="Engineering approach"
               title="How we approach it"
@@ -51,7 +51,7 @@ export default function Approach({
             </div>
           </div>
 
-          <div className={imageOnLeft ? "lg:order-1" : undefined}>
+          <div className={imageOnLeft ? "lg:order-1" : "order-2"}>
             <ServiceImageFigure image={image} />
           </div>
         </div>

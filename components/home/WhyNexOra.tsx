@@ -42,7 +42,7 @@ export default function WhyNexOra({
       <div className={PAGE_CONTAINER_CLASS}>
         <EyebrowLabel>Why NexOra</EyebrowLabel>
 
-        <h2 className={`text-headline-section ${MT_SPACE_4} text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}>
+        <h2 className={`text-headline-section ${MT_SPACE_4} max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-balance text-[var(--color-text-primary)]`}>
           Small team. Full stack. No handoffs.
         </h2>
 

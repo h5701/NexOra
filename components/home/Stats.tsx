@@ -30,6 +30,12 @@ const stats: Stat[] = [
   { target: null, text: "Founder-led", label: "Start to ship", accent: true },
 ];
 
+function statValueClass(stat: Stat) {
+  if (stat.target !== null) return "stat-value stat-value--numeric";
+  if (stat.text && stat.text.length > 12) return "stat-value stat-value--text-long";
+  return "stat-value stat-value--text";
+}
+
 export default function Stats() {
   const sectionRef = useRef<HTMLElement>(null);
   const [values, setValues] = useState<number[]>(() => stats.map(() => 0));
@@ -85,7 +91,7 @@ export default function Stats() {
   return (
     <section
       ref={sectionRef}
-      className="surface-light scroll-mt-[100px] border-b border-[var(--color-border)] py-10 md:py-12"
+      className="section-py surface-light scroll-mt-[100px] border-b border-[var(--color-border)]"
       aria-label="Studio at a glance"
     >
       <div className={PAGE_CONTAINER_CLASS}>
@@ -93,26 +99,24 @@ export default function Stats() {
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className={`group relative flex flex-col items-center justify-center px-4 py-6 text-center transition-colors duration-200 md:px-[44px] md:py-9 ${
-                index === 0 ? "stat-first-accent" : ""
-              } ${
+              className={`relative flex min-h-[7.75rem] flex-col items-center justify-center px-5 py-8 text-center sm:min-h-[8.25rem] sm:px-6 sm:py-9 md:min-h-[9rem] md:px-10 md:py-10 ${
                 index % 2 === 0
                   ? "border-r border-[var(--color-border)]"
                   : "max-md:border-r-0"
-              } ${index < 2 ? "border-b border-[var(--color-border)] md:border-b-0" : ""} ${
+              } ${
+                index < 2
+                  ? "border-b border-[var(--color-border)] md:border-b-0"
+                  : ""
+              } ${
                 index !== stats.length - 1
                   ? "md:border-r md:border-[var(--color-border)]"
                   : ""
               } ${index === stats.length - 1 ? "md:border-r-0" : ""}`}
             >
               <p
-                className={`mb-[7px] font-[family-name:var(--font-display)] font-extrabold leading-none tracking-[-0.05em] ${
-                  stat.target === null && stat.text && stat.text.length > 12
-                    ? "text-xl md:text-2xl"
-                    : stat.target === null
-                      ? "text-2xl"
-                      : "text-3xl"
-                } ${stat.accent ? "stat-accent" : "text-[var(--color-text-primary)]"}`}
+                className={`${statValueClass(stat)} ${
+                  stat.accent ? "stat-accent" : "text-[var(--color-text-primary)]"
+                }`}
               >
                 {stat.target === null ? (
                   stat.text
@@ -124,7 +128,7 @@ export default function Stats() {
                   </>
                 )}
               </p>
-              <p className="text-xs font-medium tracking-[0.1em] text-[var(--color-text-muted)] uppercase">
+              <p className="stat-caption mt-3 max-w-[18ch] text-balance">
                 {stat.label}
               </p>
             </div>

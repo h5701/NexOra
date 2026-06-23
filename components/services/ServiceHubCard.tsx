@@ -34,8 +34,8 @@ export default function ServiceHubCard({ service }: { service: ServiceContent })
           className="absolute inset-0 bg-gradient-to-t from-[rgba(6,8,30,0.55)] to-transparent"
           aria-hidden="true"
         />
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-2">
-          <span className="text-xs font-medium tracking-[0.08em] text-white/80 uppercase">
+        <div className="absolute right-3 bottom-3 left-3 flex items-center justify-between gap-3">
+          <span className="min-w-0 truncate text-xs font-medium tracking-[0.08em] text-white/85 uppercase">
             {service.tag}
           </span>
           <TierBadge tier={service.tier} label={service.tierLabel} />

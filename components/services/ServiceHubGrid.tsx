@@ -4,6 +4,7 @@ import ServiceHubCard from "@/components/services/ServiceHubCard";
 import ServiceImageFigure from "@/components/services/ServiceImageFigure";
 import CardTopLine from "@/components/ui/CardTopLine";
 import DarkPageHero, { GradientHeroTitle } from "@/components/ui/DarkPageHero";
+import CardTagRow from "@/components/ui/CardTagRow";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import { STUDIO_POSITIONING, PORTFOLIO_HEADLINE, PORTFOLIO_LEAD } from "@/lib/content/site-copy";
@@ -39,7 +40,7 @@ export default function ServiceHubGrid() {
 
       <section className={`section-py ${SECTION_TINT_CLASS}`}>
         <div className={PAGE_CONTAINER_CLASS}>
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
             <div>
               <SectionHeader
                 eyebrow={hubOverview.eyebrow}
@@ -93,13 +94,14 @@ export default function ServiceHubGrid() {
           >
             <CardTopLine />
             <div className={CARD_BODY_PADDING_CLASS}>
-              <div className="mb-[22px] flex items-center gap-2 text-xs font-medium tracking-[0.1em] text-[var(--color-text-muted)] uppercase">
-                <span className="service-tag-rule" aria-hidden="true" />
-                <span>{advancedAiCallout.tag}</span>
-                <span className="ml-auto shrink-0 rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs font-medium tracking-[0.06em] text-[var(--color-text-muted)]">
-                  {advancedAiCallout.tierLabel}
-                </span>
-              </div>
+              <CardTagRow
+                tag={advancedAiCallout.tag}
+                badge={
+                  <span className="rounded-full border border-[var(--color-border)] px-2.5 py-0.5 text-xs font-medium tracking-[0.06em] text-[var(--color-text-muted)]">
+                    {advancedAiCallout.tierLabel}
+                  </span>
+                }
+              />
               <h2 className="font-[family-name:var(--font-display)] text-xl font-semibold leading-heading tracking-[-0.015em] text-[var(--color-text-primary)]">
                 {advancedAiCallout.title}
               </h2>

@@ -7,7 +7,7 @@ export default function EyebrowLabel({
 }) {
   return (
     <p
-      className={`text-xs font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase ${className}`}
+      className={`eyebrow-label text-xs font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase ${className}`}
     >
       {children}
     </p>
