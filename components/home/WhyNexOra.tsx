@@ -40,11 +40,13 @@ export default function WhyNexOra({
       className={`section-py scroll-mt-[100px] overflow-hidden ${bgClass}`}
     >
       <div className={PAGE_CONTAINER_CLASS}>
-        <EyebrowLabel>Why NexOra</EyebrowLabel>
+        <Reveal>
+          <EyebrowLabel>Why NexOra</EyebrowLabel>
 
-        <h2 className={`text-headline-section ${MT_SPACE_4} max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-balance text-[var(--color-text-primary)]`}>
-          Small team. Full stack. No handoffs.
-        </h2>
+          <h2 className={`text-headline-section ${MT_SPACE_4} max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-balance text-[var(--color-text-primary)]`}>
+            Small team. Full stack. No handoffs.
+          </h2>
+        </Reveal>
 
         <div className={MT_SPACE_SECTION}>
           <div className={`grid grid-cols-1 md:grid-cols-3 ${GAP_CARD_GRID}`}>
@@ -52,7 +54,7 @@ export default function WhyNexOra({
               <Reveal
                 as="article"
                 key={card.index}
-                delay={index * 0.07}
+                delay={index * 0.06}
                 className={`${CARD_DEPTH_INTERACTIVE_CLASS} ${CARD_BODY_PADDING_COMPACT_CLASS}`}
               >
                 <CardTopLine />

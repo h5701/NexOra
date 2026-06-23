@@ -4,7 +4,7 @@ import HeroOrbs from "@/components/ui/HeroOrbs";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import Reveal from "@/components/ui/Reveal";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
-import { MT_SPACE_SECTION } from "@/lib/styles";
+import { MT_SPACE_SECTION, MT_CTA } from "@/lib/styles";
 
 export default function Hero() {
   return (
@@ -42,20 +42,21 @@ export default function Hero() {
         </Reveal>
 
         <Reveal delay={0.16}>
-          <div className={`${MT_SPACE_SECTION} flex flex-col items-start justify-between gap-8 md:flex-row md:items-end`}>
+          <div
+            className={`${MT_SPACE_SECTION} flex flex-col items-start md:flex-row md:items-end md:justify-between`}
+          >
             <p className="max-w-[440px] text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
               Platforms, web apps, and AI systems for UK founders — scoped
               clearly, built to hold up in production.
             </p>
 
-            <div className="flex flex-col items-start gap-4 md:items-end">
+            <div
+              className={`${MT_CTA} flex flex-col items-start gap-4 md:mt-0 md:items-end`}
+            >
               <PrimaryButton href="/contact">Start a project →</PrimaryButton>
-              <Link
-                href="#work"
-                className="group/link inline-flex items-center gap-[5px] border-0 bg-transparent text-sm font-normal text-[var(--color-text-muted)] no-underline transition-colors duration-150 hover:text-[var(--color-cyan)]"
-              >
+              <Link href="#work" className="link-ghost group/link text-sm">
                 <span>See our work</span>
-                <span className="transition-transform duration-150 group-hover/link:translate-x-1">
+                <span className="link-ghost-arrow" aria-hidden="true">
                   →
                 </span>
               </Link>

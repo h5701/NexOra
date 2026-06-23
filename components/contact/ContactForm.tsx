@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import DepthCard from "@/components/ui/DepthCard";
 import { CONTACT_EMAIL, CONTACT_PROJECT_TYPES } from "@/lib/constants";
-import { CARD_BODY_PADDING_CLASS } from "@/lib/styles";
+import { CARD_BODY_PADDING_CLASS, LINK_ACCENT_CLASS } from "@/lib/styles";
 
 type ContactFormValues = {
   name: string;
@@ -199,7 +199,7 @@ export default function ContactForm({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="btn-primary inline-flex w-full items-center justify-center border-0 transition-[opacity,transform] duration-150 hover:opacity-[0.88] hover:-translate-y-px active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+              className="btn-primary inline-flex w-full items-center justify-center border-0 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
             >
               {isSubmitting ? "Submitting..." : "Submit project →"}
             </button>
@@ -214,10 +214,7 @@ export default function ContactForm({
 
       <p className="mt-4 text-sm font-light text-[var(--color-text-secondary)]">
         Or email us directly at{" "}
-        <a
-          href={`mailto:${CONTACT_EMAIL}`}
-          className="text-[var(--color-cyan)] no-underline transition-colors duration-150 hover:opacity-80"
-        >
+        <a href={`mailto:${CONTACT_EMAIL}`} className={LINK_ACCENT_CLASS}>
           {CONTACT_EMAIL}
         </a>
       </p>

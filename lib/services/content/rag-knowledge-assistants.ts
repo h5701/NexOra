@@ -62,14 +62,25 @@ export const ragKnowledgeAssistants: ServiceContent = {
     "Scott Graham",
     "https://unsplash.com/@homajob",
   ),
-  techTools: [
-    "pgvector",
-    "Pinecone",
-    "OpenAI embeddings",
-    "Cohere reranking",
-    "LangChain / custom pipelines",
-    "S3 / GCS",
-    "PostgreSQL",
+  techToolGroups: [
+    {
+      label: "AI / Data",
+      tools: [
+        "pgvector",
+        "Pinecone",
+        "OpenAI embeddings",
+        "Cohere reranking",
+        "LangChain / custom pipelines",
+      ],
+    },
+    {
+      label: "Backend",
+      tools: ["PostgreSQL"],
+    },
+    {
+      label: "Infra",
+      tools: ["S3 / GCS"],
+    },
   ],
   cta: {
     label: "Start a project →",

@@ -40,7 +40,11 @@ function CarouselDots({
           key={image.src}
           type="button"
           aria-label={`Go to screen ${index + 1}`}
-          onClick={() => onSelect(index)}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            onSelect(index);
+          }}
           className={`h-1.5 rounded-full transition-all duration-200 ${
             index === activeIndex
               ? "w-5 bg-[var(--color-cyan)]"
@@ -52,7 +56,7 @@ function CarouselDots({
   );
 }
 
-export default function FikrLessPreview() {
+export default function FikrLessPreview({ compact = false }: { compact?: boolean }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -78,9 +82,16 @@ export default function FikrLessPreview() {
   }, []);
 
   return (
-    <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)]">
-      <div className="flex flex-col items-center px-4 py-6 md:py-8">
-        <div className="surface-dark relative w-[min(248px,74vw)] rounded-[32px] !bg-transparent md:w-[230px]">
+    <div
+      className={`flex w-full flex-col items-center ${compact ? "px-3 py-4 md:py-5" : "px-4 py-6 md:py-8"}`}
+    >
+        <div
+          className={`surface-dark relative rounded-[32px] !bg-transparent ${
+            compact
+              ? "w-[min(210px,68vw)] md:w-[220px]"
+              : "w-[min(248px,74vw)] md:w-[230px]"
+          }`}
+        >
           <div className={`${CARD_DEPTH_CLASS} rounded-[32px] p-[7px]`}>
             <CardTopLine />
 
@@ -126,14 +137,15 @@ export default function FikrLessPreview() {
           </div>
         </div>
 
-        <div className="mt-4 w-full">
+        <div className={`w-full ${compact ? "mt-3" : "mt-4"}`}>
           <CarouselDots activeIndex={activeIndex} onSelect={scrollToSlide} />
         </div>
 
-        <p className="mt-3 text-xs font-medium tracking-[0.08em] text-[var(--color-text-muted)] uppercase">
-          Swipe to explore
-        </p>
-      </div>
+        {!compact && (
+          <p className="mt-3 text-xs font-medium tracking-[0.08em] text-[var(--color-text-muted)] uppercase">
+            Swipe to explore
+          </p>
+        )}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import type { ServiceContent } from "@/lib/services/types";
 import {
   CARD_BODY_PADDING_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
+  LINK_CTA_CLASS,
 } from "@/lib/styles";
 
 export default function ServiceHubCard({ service }: { service: ServiceContent }) {
@@ -15,7 +16,7 @@ export default function ServiceHubCard({ service }: { service: ServiceContent })
   return (
     <Link
       href={href}
-      className={`group/link ${CARD_DEPTH_INTERACTIVE_CLASS} flex flex-col overflow-hidden no-underline`}
+      className={`group/link ${CARD_DEPTH_INTERACTIVE_CLASS} flex h-full flex-col overflow-hidden no-underline`}
     >
       <CardTopLine />
 
@@ -25,7 +26,7 @@ export default function ServiceHubCard({ service }: { service: ServiceContent })
           alt={service.hub.cardImage.alt}
           width={service.hub.cardImage.width}
           height={service.hub.cardImage.height}
-          className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover/link:scale-[1.03]"
+          className="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-[var(--dur)] motion-safe:ease-[var(--ease)] motion-safe:group-hover/link:scale-[1.03]"
           sizes="(max-width: 768px) 100vw, 360px"
           placeholder="blur"
           blurDataURL={IMAGE_BLUR_DATA_URL}
@@ -49,9 +50,10 @@ export default function ServiceHubCard({ service }: { service: ServiceContent })
         <p className="mt-3 flex-1 text-sm font-light leading-body text-[var(--color-text-secondary)]">
           {service.hub.oneLiner}
         </p>
-        <span className="mt-5 inline-flex items-center text-sm font-semibold text-[var(--color-cyan)]">
+        <span className={`${LINK_CTA_CLASS} mt-5`}>
           Learn more
-          <span className="ml-1 transition-transform duration-150 motion-safe:group-hover/link:translate-x-1">
+          <span className="link-cta-arrow" aria-hidden="true">
+            {" "}
             →
           </span>
         </span>

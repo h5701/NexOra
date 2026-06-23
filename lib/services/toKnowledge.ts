@@ -34,7 +34,7 @@ export function serializeServiceForKnowledge(
     deliverables: service.deliverables,
     approachIntro: service.approach.intro,
     approachPoints: service.approach.points,
-    techTools: service.techTools,
+    techTools: service.techToolGroups.flatMap((group) => group.tools),
     contactPath: `/contact?type=${encodeURIComponent(service.cta.projectType)}`,
   };
 }

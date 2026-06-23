@@ -1,33 +1,38 @@
-import SectionHeader from "@/components/ui/SectionHeader";
+import SectionHeaderReveal from "@/components/ui/SectionHeaderReveal";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
-import { MT_SPACE_SECTION, SECTION_DARK_CLASS } from "@/lib/styles";
+import type { TechToolGroup } from "@/lib/services/types";
+import { MT_SPACE_4, SECTION_DARK_CLASS } from "@/lib/styles";
 
 type TechToolsProps = {
-  tools: string[];
+  groups: TechToolGroup[];
 };
 
-function ToolChips({ tools }: TechToolsProps) {
+function ToolGroup({ label, tools }: TechToolGroup) {
   return (
-    <div className="flex flex-wrap gap-2">
-      {tools.map((tool) => (
-        <span
-          key={tool}
-          className="rounded-full border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-1.5 text-xs font-medium tracking-[0.02em] text-[var(--color-text-secondary)]"
-        >
-          {tool}
-        </span>
-      ))}
+    <div className="tech-tools-group">
+      <p className="tech-tools-group__label">{label}</p>
+      <div className="tech-tools-group__chips">
+        {tools.map((tool) => (
+          <span key={tool} className="tech-tool-chip">
+            {tool}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
 
-export default function TechTools({ tools }: TechToolsProps) {
+export default function TechTools({ groups }: TechToolsProps) {
   return (
-    <section className={`section-py ${SECTION_DARK_CLASS}`}>
+    <section
+      className={`tech-tools-band ${SECTION_DARK_CLASS} border-t border-[var(--color-border)]`}
+    >
       <div className={PAGE_CONTAINER_CLASS}>
-        <SectionHeader eyebrow="Stack" title="Tech & tools" />
-        <div className={MT_SPACE_SECTION}>
-          <ToolChips tools={tools} />
+        <SectionHeaderReveal eyebrow="Stack" title="Tech & tools" />
+        <div className={`tech-tools-grid ${MT_SPACE_4}`}>
+          {groups.map((group) => (
+            <ToolGroup key={group.label} {...group} />
+          ))}
         </div>
       </div>
     </section>

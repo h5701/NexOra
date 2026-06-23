@@ -12,7 +12,7 @@ export default function Portfolio() {
   return (
     <section
       id="work"
-      className="section-py surface-light scroll-mt-[100px] overflow-hidden"
+      className="section-py surface-tint-contrast scroll-mt-[100px] overflow-hidden border-t border-[var(--color-border)]"
     >
       <div className={PAGE_CONTAINER_CLASS}>
         <EyebrowLabel>Our work</EyebrowLabel>

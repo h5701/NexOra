@@ -1,4 +1,4 @@
-import SectionHeader from "@/components/ui/SectionHeader";
+import SectionHeaderReveal from "@/components/ui/SectionHeaderReveal";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import { MT_SPACE_SECTION, SECTION_DARK_CLASS } from "@/lib/styles";
 
@@ -28,7 +28,7 @@ export default function Deliverables({ items }: DeliverablesProps) {
   return (
     <section className={`section-py ${SECTION_DARK_CLASS}`}>
       <div className={PAGE_CONTAINER_CLASS}>
-        <SectionHeader
+        <SectionHeaderReveal
           eyebrow="Deliverables"
           title="What we deliver"
           lead="Concrete artifacts — not adjectives."

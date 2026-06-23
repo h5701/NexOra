@@ -62,14 +62,20 @@ export const iotSystems: ServiceContent = {
     "ThisisEngineering",
     "https://unsplash.com/@thisisengineering",
   ),
-  techTools: [
-    "MQTT (Mosquitto / EMQX)",
-    "Kafka / RabbitMQ",
-    "InfluxDB / TimescaleDB",
-    "AWS IoT Core",
-    "WebSockets / SSE",
-    "Grafana",
-    "Docker",
+  techToolGroups: [
+    {
+      label: "Backend",
+      tools: [
+        "MQTT (Mosquitto / EMQX)",
+        "Kafka / RabbitMQ",
+        "InfluxDB / TimescaleDB",
+        "WebSockets / SSE",
+      ],
+    },
+    {
+      label: "Infra",
+      tools: ["AWS IoT Core", "Grafana", "Docker"],
+    },
   ],
   cta: {
     label: "Start a project →",

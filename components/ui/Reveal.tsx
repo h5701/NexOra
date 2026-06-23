@@ -33,18 +33,34 @@ export default function Reveal({
     const el = ref.current;
     if (!el) return;
 
+    // If the element is already in view on mount (e.g. above-the-fold hero),
+    // reveal right away so nothing flashes empty waiting on the observer.
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < vh && rect.bottom > 0) {
+      setVisible(true);
+      return;
+    }
+
+    // Safety fallback: never leave content hidden if the observer misbehaves.
+    const fallback = window.setTimeout(() => setVisible(true), 1500);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
           observer.disconnect();
+          window.clearTimeout(fallback);
         }
       },
       { threshold, rootMargin: "0px 0px -8% 0px" }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(fallback);
+    };
   }, [threshold]);
 
   return (

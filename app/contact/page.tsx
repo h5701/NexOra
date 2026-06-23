@@ -3,13 +3,14 @@ import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ContactForm from "@/components/contact/ContactForm";
-import DepthCard from "@/components/ui/DepthCard";
+import EyebrowLabel from "@/components/ui/EyebrowLabel";
 import HeroOrbs from "@/components/ui/HeroOrbs";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
 import {
-  CARD_BODY_PADDING_CLASS,
+  GAP_CARD_GRID,
   MT_SPACE_4,
+  MT_SPACE_SECTION,
   SECTION_HERO_DARK_CLASS,
   SECTION_TINT_CLASS,
 } from "@/lib/styles";
@@ -59,26 +60,32 @@ export default function ContactPage({
         </section>
 
         <section className={`section-py ${SECTION_TINT_CLASS}`}>
-          <div className={PAGE_CONTAINER_CLASS}>
-            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-              <DepthCard className={CARD_BODY_PADDING_CLASS} interactive={false}>
-                <p className="text-xs font-medium tracking-[0.14em] text-[var(--color-text-muted)] uppercase">
-                  How it works
-                </p>
-                <ul className={`${MT_SPACE_4} space-y-5`}>
-                  {howItWorks.map((item, index) => (
-                    <li key={item} className="flex items-start gap-4">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-purple)] bg-[rgba(123,94,167,0.15)] text-xs font-semibold tracking-[0.04em] text-[var(--color-purple)]">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span className="pt-1 text-sm font-light leading-body text-[var(--color-text-secondary)]">
-                        {item}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </DepthCard>
+          <div className={`${PAGE_CONTAINER_CLASS} mx-auto max-w-[760px]`}>
+            <div>
+              <EyebrowLabel className="text-center sm:text-left">
+                How it works
+              </EyebrowLabel>
 
+              <ol
+                className={`${MT_SPACE_4} grid grid-cols-1 sm:grid-cols-3 ${GAP_CARD_GRID}`}
+              >
+                {howItWorks.map((item, index) => (
+                  <li
+                    key={item}
+                    className="flex h-full min-h-[148px] flex-col rounded-[var(--radius-lg)] border border-[var(--color-card-border)] bg-[var(--color-card)] p-6 shadow-[var(--shadow-card)]"
+                  >
+                    <span className="mb-4 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--accent-primary)_35%,transparent)] bg-[color-mix(in_srgb,var(--accent-primary)_10%,transparent)] font-[family-name:var(--font-display)] text-sm font-bold tracking-[0.02em] text-[var(--accent-primary)]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-base font-light leading-body text-[var(--color-text-secondary)]">
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className={MT_SPACE_SECTION}>
               <ContactForm defaultProjectType={defaultProjectType} />
             </div>
           </div>

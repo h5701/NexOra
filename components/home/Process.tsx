@@ -31,22 +31,26 @@ export default function Process() {
   return (
     <section className="section-py surface-tint scroll-mt-[100px] overflow-hidden">
       <div className={PAGE_CONTAINER_CLASS}>
-        <EyebrowLabel>The process</EyebrowLabel>
+        <Reveal>
+          <EyebrowLabel>The process</EyebrowLabel>
 
-        <h2 className={`text-headline-section ${MT_SPACE_4} max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-balance text-[var(--color-text-primary)]`}>
-          From brief to live product. No surprises.
-        </h2>
+          <h2 className={`text-headline-section ${MT_SPACE_4} max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-balance text-[var(--color-text-primary)]`}>
+            From brief to live product. No surprises.
+          </h2>
+        </Reveal>
 
-        <Reveal className={MT_SPACE_SECTION}>
+        <div className={MT_SPACE_SECTION}>
           <DepthCard interactive={false} className="overflow-hidden p-0">
             <div className="grid grid-cols-1 gap-px bg-[var(--color-border)] sm:grid-cols-2 lg:grid-cols-4">
-              {steps.map((step) => (
-                <article
+              {steps.map((step, index) => (
+                <Reveal
+                  as="article"
                   key={step.title}
-                  className="group relative bg-[var(--color-card)] px-6 py-8 transition-colors duration-200 hover:bg-[color-mix(in_srgb,var(--color-accent)_5%,transparent)] sm:px-7 sm:py-9 md:px-[30px] md:py-9"
+                  delay={index * 0.06}
+                  className="group process-step relative bg-[var(--color-card)] px-6 py-8 hover:bg-[color-mix(in_srgb,var(--color-accent)_5%,transparent)] sm:px-7 sm:py-9 md:px-[30px] md:py-9"
                 >
                   <span
-                    className="pointer-events-none absolute top-0 right-[30px] left-[30px] h-[2px] rounded-b-[2px] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                    className="process-step-accent pointer-events-none absolute top-0 right-[30px] left-[30px] h-[2px] rounded-b-[2px] opacity-0 group-hover:opacity-100"
                     style={{ background: "var(--gradient-step-hover)" }}
                     aria-hidden="true"
                   />
@@ -62,11 +66,11 @@ export default function Process() {
                   <p className="text-sm font-light leading-body text-[var(--color-text-secondary)]">
                     {step.body}
                   </p>
-                </article>
+                </Reveal>
               ))}
             </div>
           </DepthCard>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

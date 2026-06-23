@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTAStrip from "@/components/home/CTAStrip";
 import Approach from "@/components/services/Approach";
 import Deliverables from "@/components/services/Deliverables";
 import ServiceCTA from "@/components/services/ServiceCTA";
@@ -41,11 +40,10 @@ export default function ServiceLayout({ content }: ServiceLayoutProps) {
           imageOnLeft={imageOnLeft}
         />
 
-        <TechTools tools={content.techTools} />
+        <TechTools groups={content.techToolGroups} />
 
         <ServiceCTA title={content.title} cta={content.cta} />
 
-        <CTAStrip />
         <Footer />
       </main>
     </>

@@ -10,31 +10,35 @@ import {
   CARD_BODY_PADDING_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
   GAP_CARD_GRID,
+  LINK_CTA_CLASS,
+  LINK_UNDERLINE_MUTED_CLASS,
   MT_SPACE_4,
   MT_SPACE_SECTION,
 } from "@/lib/styles";
 
 export default function Services() {
   return (
-    <section className="section-py surface-tint scroll-mt-[100px] overflow-hidden">
+    <section className="section-py surface-light scroll-mt-[100px] overflow-hidden border-t border-[var(--color-border)]">
       <div className={PAGE_CONTAINER_CLASS}>
-        <EyebrowLabel>What we build</EyebrowLabel>
+        <Reveal>
+          <EyebrowLabel>What we build</EyebrowLabel>
 
-        <div className={`${MT_SPACE_4} flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between`}>
-          <h2 className="text-headline-section max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
-            Platforms, AI, and infrastructure — shipped properly.
-          </h2>
-          <Link
-            href="/services"
-            className="group/link inline-flex shrink-0 items-center border-b border-[var(--color-text-muted)] pb-px text-sm font-semibold text-[var(--color-text-muted)] no-underline transition-[color,border-color,transform] duration-150 hover:border-[var(--color-cyan)] hover:text-[var(--color-cyan)]"
-          >
-            <span>All services</span>
-            <span className="transition-transform duration-150 group-hover/link:translate-x-1">
-              {" "}
-              →
-            </span>
-          </Link>
-        </div>
+          <div className={`${MT_SPACE_4} flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between`}>
+            <h2 className="text-headline-section max-w-[640px] text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]">
+              Platforms, AI, and infrastructure — shipped properly.
+            </h2>
+            <Link
+              href="/services"
+              className={`group/link ${LINK_UNDERLINE_MUTED_CLASS} shrink-0`}
+            >
+              <span>All services</span>
+              <span className="link-underline-muted-arrow" aria-hidden="true">
+                {" "}
+                →
+              </span>
+            </Link>
+          </div>
+        </Reveal>
 
         <div className={MT_SPACE_SECTION}>
           <div className={`grid grid-cols-1 sm:grid-cols-2 ${GAP_CARD_GRID}`}>
@@ -69,10 +73,10 @@ export default function Services() {
                 {service.href && service.linkText && (
                   <Link
                     href={service.href}
-                    className="mt-5 inline-flex items-center text-sm font-semibold text-[var(--color-cyan)] no-underline transition-colors duration-150"
+                    className={`${LINK_CTA_CLASS} mt-5`}
                   >
                     <span>{service.linkText}</span>
-                    <span className="transition-transform duration-150 group-hover/link:translate-x-1">
+                    <span className="link-cta-arrow" aria-hidden="true">
                       {" "}
                       →
                     </span>

@@ -61,14 +61,24 @@ export const productDevelopment: ServiceContent = {
     "Icons8 Team",
     "https://unsplash.com/@icons8",
   ),
-  techTools: [
-    "Next.js / React",
-    "Node.js / TypeScript",
-    "PostgreSQL",
-    "Prisma / Drizzle",
-    "AWS / Vercel",
-    "React Native",
-    "Stripe",
+  techToolGroups: [
+    {
+      label: "Frontend",
+      tools: ["Next.js / React", "React Native"],
+    },
+    {
+      label: "Backend",
+      tools: [
+        "Node.js / TypeScript",
+        "PostgreSQL",
+        "Prisma / Drizzle",
+        "Stripe",
+      ],
+    },
+    {
+      label: "Infra",
+      tools: ["AWS / Vercel"],
+    },
   ],
   cta: {
     label: "Start a project →",

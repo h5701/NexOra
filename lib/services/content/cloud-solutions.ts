@@ -62,14 +62,19 @@ export const cloudSolutions: ServiceContent = {
     "Adrien Converse",
     "https://unsplash.com/@adrienconverse",
   ),
-  techTools: [
-    "AWS",
-    "Docker",
-    "Kubernetes / ECS",
-    "Terraform",
-    "GitHub Actions",
-    "CloudWatch",
-    "RDS / Aurora",
+  techToolGroups: [
+    {
+      label: "Infra",
+      tools: [
+        "AWS",
+        "Docker",
+        "Kubernetes / ECS",
+        "Terraform",
+        "GitHub Actions",
+        "CloudWatch",
+        "RDS / Aurora",
+      ],
+    },
   ],
   cta: {
     label: "Start a project →",

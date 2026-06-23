@@ -84,7 +84,7 @@ export default function AboutPage() {
               title="The people behind NexOra"
             />
 
-            <div className={`${MT_SPACE_SECTION} grid grid-cols-1 md:grid-cols-2 ${GAP_CARD_GRID}`}>
+            <div className={`${MT_SPACE_SECTION} grid grid-cols-1 items-start md:grid-cols-2 ${GAP_CARD_GRID}`}>
               {FOUNDERS.map((founder) => (
                 <article
                   key={founder.name}

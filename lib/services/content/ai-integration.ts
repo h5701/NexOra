@@ -61,14 +61,20 @@ export const aiIntegration: ServiceContent = {
     "Luke Chesser",
     "https://unsplash.com/@lukechesser",
   ),
-  techTools: [
-    "OpenAI API",
-    "Anthropic API",
-    "pgvector",
-    "Pinecone",
-    "Redis / queues",
-    "Server-sent events",
-    "TypeScript / Python",
+  techToolGroups: [
+    {
+      label: "AI / Data",
+      tools: [
+        "OpenAI API",
+        "Anthropic API",
+        "pgvector",
+        "Pinecone",
+      ],
+    },
+    {
+      label: "Backend",
+      tools: ["Redis / queues", "Server-sent events", "TypeScript / Python"],
+    },
   ],
   cta: {
     label: "Start a project →",

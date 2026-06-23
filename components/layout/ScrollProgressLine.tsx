@@ -37,22 +37,13 @@ export default function ScrollProgressLine() {
 
   return (
     <div
-      className="pointer-events-none fixed top-20 right-8 z-[90] hidden h-[calc(100vh-160px)] w-[3px] md:block"
+      className="scroll-progress-bar pointer-events-none fixed top-0 right-0 left-0 z-[110] h-[2px]"
       aria-hidden="true"
     >
-      <div className="absolute inset-0 rounded-[3px] bg-[rgba(255,255,255,0.1)]" />
-
       <div
-        className="absolute top-0 right-0 left-0 rounded-[3px] transition-[height] duration-100 ease-linear"
-        style={{
-          height: `${progress}%`,
-          background: "var(--color-purple)",
-        }}
-      >
-        <span
-          className="absolute bottom-0 left-1/2 h-[10px] w-[10px] -translate-x-1/2 translate-y-1/2 rounded-full bg-[var(--color-cyan)]"
-        />
-      </div>
+        className="scroll-progress-bar__fill h-full origin-left transition-[width] duration-100 ease-linear"
+        style={{ width: `${progress}%` }}
+      />
     </div>
   );
 }

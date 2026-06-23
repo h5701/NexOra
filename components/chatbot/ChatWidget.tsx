@@ -459,12 +459,19 @@ export default function ChatWidget() {
           onClick={() => setOpen(true)}
           aria-expanded={open}
           aria-controls={panelId}
-          aria-label="Open NexOra assistant"
-          className={`chat-launcher flex h-14 w-14 items-center justify-center rounded-full border-0 text-white motion-safe:transition-[transform,box-shadow] motion-safe:duration-300 hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cyan)] ${
-            open ? "" : "chat-launcher-idle"
-          }`}
+          aria-label="Open NexOra assistant — ask about our services"
+          className="chat-launcher-group group"
         >
-          <ChatRobotIcon className="h-7 w-7" />
+          <span className="chat-launcher-cta">
+            Need help? Ask our AI
+          </span>
+          <span
+            className={`chat-launcher flex h-14 w-14 items-center justify-center rounded-full text-white motion-safe:transition-transform motion-safe:duration-300 group-hover:scale-105 group-focus-visible:scale-105 ${
+              open ? "" : "chat-launcher-idle"
+            }`}
+          >
+            <ChatRobotIcon className="h-7 w-7" />
+          </span>
         </button>
       </div>
     </>

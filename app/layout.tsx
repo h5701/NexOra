@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne } from "next/font/google";
+import { DM_Sans, Space_Grotesk } from "next/font/google";
 import ChatWidget from "@/components/chatbot/ChatWidget";
 import ScrollProgressLine from "@/components/layout/ScrollProgressLine";
 import "./globals.css";
 
-const syne = Syne({
+const display = Space_Grotesk({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
 const dmSans = DM_Sans({
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${display.variable} ${dmSans.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body

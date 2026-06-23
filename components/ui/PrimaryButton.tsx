@@ -21,7 +21,7 @@ export default function PrimaryButton({
     <Link
       href={href}
       onClick={onClick}
-      className={`${sizeClass} inline-flex items-center gap-2 border-0 no-underline transition-[opacity,transform] duration-150 hover:opacity-[0.88] hover:-translate-y-px active:translate-y-0 ${className}`}
+      className={`${sizeClass} inline-flex items-center gap-2 border-0 no-underline ${className}`}
     >
       {children}
     </Link>

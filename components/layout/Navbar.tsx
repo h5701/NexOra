@@ -8,6 +8,7 @@ import ServicesMegaMenu, {
 import Logo from "@/components/ui/Logo";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import { NAV_LINKS, NAV_SERVICE_GROUPS } from "@/lib/constants";
+import { LINK_NAV_CLASS } from "@/lib/styles";
 
 function NavLink({
   href,
@@ -24,7 +25,7 @@ function NavLink({
     <Link
       href={href}
       onClick={onClick}
-      className={`text-sm font-normal leading-none text-[var(--color-text-muted)] transition-colors duration-150 hover:text-[var(--color-text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-cyan)] ${className}`}
+      className={`${LINK_NAV_CLASS} ${className}`}
     >
       {label}
     </Link>
@@ -80,7 +81,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 right-0 left-0 z-[100] border-b px-[clamp(24px,5vw,80px)] transition-[background,backdrop-filter,border-color,padding,box-shadow] duration-300 ease ${
           scrolled || mobileOpen || servicesOpen
-            ? "border-[var(--color-border)] bg-[color-mix(in_srgb,white_82%,transparent)] py-3 shadow-[0_8px_30px_-16px_rgba(22,24,43,0.25)] backdrop-blur-[14px] md:py-[14px]"
+            ? "border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-page)_72%,transparent)] py-3 shadow-[0_10px_34px_-18px_rgba(22,24,43,0.22)] backdrop-blur-[18px] backdrop-saturate-150 md:py-[14px]"
             : "surface-dark !bg-transparent border-transparent py-4 md:py-[22px]"
         }`}
       >
@@ -172,7 +173,7 @@ export default function Navbar() {
           />
           <div
             id="mobile-nav"
-            className="fixed top-[64px] right-0 left-0 z-[99] flex max-h-[calc(100vh-64px)] flex-col gap-8 overflow-y-auto border-t border-[var(--color-border)] bg-[color-mix(in_srgb,white_97%,transparent)] px-[clamp(24px,5vw,80px)] py-10 backdrop-blur-[14px] md:hidden"
+            className="fixed top-[64px] right-0 left-0 z-[99] flex max-h-[calc(100vh-64px)] flex-col gap-8 overflow-y-auto border-t border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-page)_96%,transparent)] px-[clamp(24px,5vw,80px)] py-10 backdrop-blur-[18px] md:hidden"
           >
             <nav className="flex flex-col gap-6" aria-label="Mobile navigation">
               <NavLink href="/" label="Home" onClick={closeMobile} className="text-md" />

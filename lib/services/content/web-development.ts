@@ -61,14 +61,19 @@ export const webDevelopment: ServiceContent = {
     "Carlos Muza",
     "https://unsplash.com/@kmuza",
   ),
-  techTools: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Tailwind CSS",
-    "Vercel / AWS",
-    "Sanity / MDX",
-    "Google Analytics",
+  techToolGroups: [
+    {
+      label: "Frontend",
+      tools: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      label: "Content",
+      tools: ["Sanity / MDX"],
+    },
+    {
+      label: "Infra",
+      tools: ["Vercel / AWS", "Google Analytics"],
+    },
   ],
   cta: {
     label: "Start a project →",

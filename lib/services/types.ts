@@ -26,6 +26,11 @@ export type ServiceImageRef = {
   creditUrl?: string;
 };
 
+export type TechToolGroup = {
+  label: string;
+  tools: string[];
+};
+
 export type ServiceContent = {
   slug: string;
   category: ServiceCategory;
@@ -50,7 +55,7 @@ export type ServiceContent = {
     points: string[];
   };
   supportingImage: ServiceImageRef;
-  techTools: string[];
+  techToolGroups: TechToolGroup[];
   cta: {
     label: string;
     projectType: string;

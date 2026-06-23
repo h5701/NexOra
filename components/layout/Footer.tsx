@@ -6,12 +6,10 @@ import {
   NAV_LINKS,
   PAGE_CONTAINER_CLASS,
 } from "@/lib/constants";
+import { LINK_ACCENT_CLASS, LINK_FOOTER_CLASS } from "@/lib/styles";
 
 const columnHeadingClass =
   "text-caption font-medium uppercase tracking-[0.1em] text-[var(--color-text-muted)]";
-
-const footerLinkClass =
-  "text-sm text-[var(--color-text-secondary)] transition-colors duration-150 hover:text-[var(--color-text-primary)]";
 
 function InstagramIcon() {
   return (
@@ -64,7 +62,7 @@ export default function Footer() {
       <div className={PAGE_CONTAINER_CLASS}>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
-            <Logo iconClassName="mr-2 h-7 w-auto" />
+            <Logo chipClassName="h-8 w-8" />
             <p className="mt-4 max-w-[260px] text-sm font-light leading-body text-[var(--color-text-secondary)]">
               We build digital products that work in the real world.
             </p>
@@ -75,7 +73,7 @@ export default function Footer() {
             <ul className="mt-4 flex flex-col gap-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className={footerLinkClass}>
+                  <Link href={link.href} className={LINK_FOOTER_CLASS}>
                     {link.label}
                   </Link>
                 </li>
@@ -88,7 +86,7 @@ export default function Footer() {
             <ul className="mt-4 flex flex-col gap-3">
               {FOOTER_SERVICE_LINKS.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className={footerLinkClass}>
+                  <Link href={link.href} className={LINK_FOOTER_CLASS}>
                     {link.label}
                   </Link>
                 </li>
@@ -101,7 +99,7 @@ export default function Footer() {
             <div className="mt-4 flex flex-col gap-4">
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="text-sm text-[var(--color-cyan)] transition-colors duration-150 hover:text-[var(--color-text-primary)]"
+                className={LINK_ACCENT_CLASS}
               >
                 {CONTACT_EMAIL}
               </a>
@@ -110,7 +108,7 @@ export default function Footer() {
                   href="https://www.instagram.com/nexora.digital.studio.uk/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--color-text-secondary)] transition-colors duration-150 hover:text-[var(--color-cyan)]"
+                  className={`${LINK_FOOTER_CLASS} text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)]`}
                   aria-label="Instagram"
                 >
                   <InstagramIcon />
@@ -119,7 +117,7 @@ export default function Footer() {
                   href="https://www.linkedin.com/company/nexoradigitalstudio/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--color-text-secondary)] transition-colors duration-150 hover:text-[var(--color-cyan)]"
+                  className={`${LINK_FOOTER_CLASS} text-[var(--color-text-secondary)] hover:text-[var(--color-cyan)]`}
                   aria-label="LinkedIn"
                 >
                   <LinkedInIcon />

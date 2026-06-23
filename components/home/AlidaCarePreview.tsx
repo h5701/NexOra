@@ -15,14 +15,24 @@ const alidaImages = [
   },
 ];
 
-export default function AlidaCarePreview() {
+type AlidaCarePreviewProps = {
+  compact?: boolean;
+};
+
+export default function AlidaCarePreview({ compact = false }: AlidaCarePreviewProps) {
   return (
-    <div className="border-b border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-5 md:px-6 md:py-6">
+    <div
+      className={`w-full ${compact ? "px-3 py-3 md:px-4 md:py-4" : "px-4 py-5 md:px-6 md:py-6"}`}
+    >
       <AlidaCareBrowserFrame
         images={alidaImages}
-        scrollable
-        showScrollHint
-        viewportHeights="h-[260px] sm:h-[330px] md:h-[390px]"
+        scrollable={!compact}
+        showScrollHint={!compact}
+        viewportHeights={
+          compact
+            ? "h-[200px] sm:h-[220px] md:h-[230px]"
+            : "h-[260px] sm:h-[330px] md:h-[390px]"
+        }
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import HeroBackdrop from "@/components/ui/HeroBackdrop";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import Reveal from "@/components/ui/Reveal";
-import { MT_SPACE_4 } from "@/lib/styles";
+import { MT_SPACE_4, MT_CTA } from "@/lib/styles";
 
 export default function CTAStrip() {
   return (
@@ -34,7 +34,7 @@ export default function CTAStrip() {
           If you have something worth building, let&apos;s talk.
         </p>
 
-        <PrimaryButton href="/contact" className="mt-8">
+        <PrimaryButton href="/contact" className={MT_CTA}>
           Start a project →
         </PrimaryButton>
       </Reveal>

@@ -62,13 +62,24 @@ export const aiAgentsAutomation: ServiceContent = {
     "AltumCode",
     "https://unsplash.com/@altumcode",
   ),
-  techTools: [
-    "OpenAI / Anthropic tool use",
-    "Temporal / BullMQ",
-    "Webhooks",
-    "REST / GraphQL APIs",
-    "Slack / email integrations",
-    "TypeScript / Python",
+  techToolGroups: [
+    {
+      label: "AI / Data",
+      tools: ["OpenAI / Anthropic tool use"],
+    },
+    {
+      label: "Backend",
+      tools: [
+        "Temporal / BullMQ",
+        "Webhooks",
+        "REST / GraphQL APIs",
+        "TypeScript / Python",
+      ],
+    },
+    {
+      label: "Integrations",
+      tools: ["Slack / email integrations"],
+    },
   ],
   cta: {
     label: "Start a project →",

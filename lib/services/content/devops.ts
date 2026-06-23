@@ -61,14 +61,19 @@ export const devops: ServiceContent = {
     "Christina Morillo",
     "https://unsplash.com/@christina1",
   ),
-  techTools: [
-    "Docker",
-    "Kubernetes / ECS",
-    "GitHub Actions",
-    "Terraform",
-    "Prometheus / Grafana",
-    "ArgoCD",
-    "AWS / GCP",
+  techToolGroups: [
+    {
+      label: "Infra",
+      tools: [
+        "Docker",
+        "Kubernetes / ECS",
+        "GitHub Actions",
+        "Terraform",
+        "Prometheus / Grafana",
+        "ArgoCD",
+        "AWS / GCP",
+      ],
+    },
   ],
   cta: {
     label: "Start a project →",
