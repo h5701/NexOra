@@ -1,36 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import CardTopLine from "@/components/ui/CardTopLine";
+import TierBadge from "@/components/services/TierBadge";
 import { IMAGE_BLUR_DATA_URL } from "@/lib/services/images";
-import type { ServicePageContent } from "@/lib/services/types";
+import type { ServiceContent } from "@/lib/services/types";
 import {
   CARD_BODY_PADDING_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
 } from "@/lib/styles";
 
-function TierBadge({
-  tier,
-  label,
-}: {
-  tier: ServicePageContent["tier"];
-  label: string;
-}) {
-  if (tier === "available") {
-    return (
-      <span className="shrink-0 rounded-full border border-[color-mix(in_srgb,var(--color-cyan)_45%,transparent)] bg-[color-mix(in_srgb,var(--color-cyan)_8%,transparent)] px-2 py-0.5 text-xs font-medium tracking-[0.06em] text-[var(--color-cyan)]">
-        {label}
-      </span>
-    );
-  }
-
-  return (
-    <span className="shrink-0 rounded-full border border-[var(--color-border)] px-2 py-0.5 text-xs font-medium tracking-[0.06em] text-[var(--color-text-muted)]">
-      {label}
-    </span>
-  );
-}
-
-export default function ServiceHubCard({ service }: { service: ServicePageContent }) {
+export default function ServiceHubCard({ service }: { service: ServiceContent }) {
   const href = `/services/${service.slug}`;
 
   return (

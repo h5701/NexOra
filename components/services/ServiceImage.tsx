@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import type { ServiceImage as ServiceImageType } from "@/lib/services/types";
+import type { ServiceImageRef } from "@/lib/services/types";
 import { IMAGE_BLUR_DATA_URL } from "@/lib/services/images";
 
 type ServiceImageProps = {
-  image: ServiceImageType;
+  image: ServiceImageRef;
   variant: "hero" | "body" | "card";
   priority?: boolean;
   className?: string;

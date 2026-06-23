@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CTAStrip from "@/components/home/CTAStrip";
@@ -6,6 +7,7 @@ import CardTopLine from "@/components/ui/CardTopLine";
 import HeroOrbs from "@/components/ui/HeroOrbs";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { PAGE_CONTAINER_CLASS } from "@/lib/constants";
+import { FOUNDERS } from "@/lib/content/founders";
 import {
   CARD_BODY_PADDING_COMPACT_CLASS,
   CARD_DEPTH_INTERACTIVE_CLASS,
@@ -22,35 +24,6 @@ export const metadata: Metadata = {
   description:
     "A modern software studio built for founders and businesses who want execution, not excuses.",
 };
-
-const founders = [
-  {
-    initials: "HA",
-    name: "Hina Ahmad",
-    role: "Co-founder · Product & Design Strategy",
-    body: "Hina leads product direction, UX strategy, and client experience at NexOra. She focuses on turning complex business ideas into clean, intuitive, and conversion-driven digital products. Her role ensures every product we build is not just functional, but intentional and user-focused.",
-    showStrengthsLabel: true,
-    tags: [
-      "UX Design",
-      "Product Strategy",
-      "Client Experience",
-      "Brand Direction",
-    ],
-  },
-  {
-    initials: "AT",
-    name: "Ali Tariq",
-    role: "Co-founder · Engineering & Systems",
-    body: "Ali leads engineering, architecture, and technical delivery at NexOra. He ensures every system is scalable, performant, and built using modern development standards. His focus is on clean architecture, reliability, and long-term maintainability.",
-    showStrengthsLabel: false,
-    tags: [
-      "Full-stack development",
-      "System architecture",
-      "Performance optimization",
-      "Scalable software",
-    ],
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -112,22 +85,41 @@ export default function AboutPage() {
             />
 
             <div className={`${MT_SPACE_SECTION} grid grid-cols-1 md:grid-cols-2 ${GAP_CARD_GRID}`}>
-              {founders.map((founder) => (
+              {FOUNDERS.map((founder) => (
                 <article
                   key={founder.name}
                   className={`${CARD_DEPTH_INTERACTIVE_CLASS} ${CARD_BODY_PADDING_COMPACT_CLASS}`}
                 >
                   <CardTopLine />
 
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(123,94,167,0.3)] bg-[rgba(123,94,167,0.15)] text-base font-semibold text-[var(--color-purple-hover)]">
-                    {founder.initials}
+                  <div className="mb-5 flex items-center gap-4">
+                    <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border border-[rgba(123,94,167,0.3)] bg-[rgba(123,94,167,0.15)]">
+                      <Image
+                        src={founder.image}
+                        alt={founder.name}
+                        width={56}
+                        height={56}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+
+                    <div className="min-w-0">
+                      <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--color-text-primary)]">
+                        {founder.name}
+                      </h3>
+                      <a
+                        href={founder.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-[var(--color-cyan)] no-underline transition-opacity hover:opacity-80"
+                      >
+                        LinkedIn
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                    </div>
                   </div>
 
-                  <h3 className="font-[family-name:var(--font-display)] text-lg font-semibold text-[var(--color-text-primary)]">
-                    {founder.name}
-                  </h3>
-
-                  <p className="mt-2 text-caption font-medium tracking-[0.1em] text-[var(--color-cyan)] uppercase">
+                  <p className="text-caption font-medium tracking-[0.1em] text-[var(--color-cyan)] uppercase">
                     {founder.role}
                   </p>
 

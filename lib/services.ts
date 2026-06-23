@@ -1,9 +1,12 @@
 import type { ServiceItem } from "./services/types";
-import { servicePages } from "./services/content";
+import { getAllServices } from "./services/index";
+import { advancedAiCallout } from "./services/hub";
 
-const bySlug = Object.fromEntries(servicePages.map((s) => [s.slug, s]));
+const bySlug = Object.fromEntries(
+  getAllServices().map((service) => [service.slug, service]),
+);
 
-/** Homepage service cards — six honest entry points, derived from servicePages where possible. */
+/** Homepage service cards — six honest entry points, derived from service registry where possible. */
 export const homeBuildServices: ServiceItem[] = [
   {
     tag: bySlug["product-development"].tag,
@@ -47,21 +50,34 @@ export const homeBuildServices: ServiceItem[] = [
     linkText: "Learn more",
   },
   {
-    tag: "Selective partnerships",
-    title: "Advanced / Custom AI",
+    tag: advancedAiCallout.tag,
+    title: advancedAiCallout.title,
     body: "Custom AI work for teams with a defined problem and room to experiment. Limited slots.",
     tier: "soon",
-    tierLabel: "Opening soon · limited partnerships",
-    href: "/contact?type=Advanced%20%2F%20Custom%20AI",
-    linkText: "Express interest",
+    tierLabel: advancedAiCallout.tierLabel,
+    href: advancedAiCallout.href,
+    linkText: advancedAiCallout.linkText,
     dimmed: true,
   },
 ];
 
-export type { ServicePageContent, ServiceCategory, ServiceImage, ServiceItem, ServiceTier } from "./services/types";
-export { servicePages, servicePagesBySlug, hubHeroImage } from "./services/content";
+export type {
+  ServiceCategory,
+  ServiceContent,
+  ServiceImageRef,
+  ServiceItem,
+  ServiceTier,
+} from "./services/types";
 export {
-  serviceHubGroups,
+  getAllServices,
+  getService,
+  getServiceIndex,
+  getServiceSlugs,
   getServicesByCategory,
+} from "./services/index";
+export {
   advancedAiCallout,
+  hubHeroImage,
+  hubOverview,
+  serviceHubGroups,
 } from "./services/hub";

@@ -1,5 +1,5 @@
 import type { ServiceHubGroup } from "./types";
-import { servicePages } from "./content";
+import { heroImage } from "./content/helpers";
 
 export const serviceHubGroups: ServiceHubGroup[] = [
   {
@@ -22,9 +22,23 @@ export const serviceHubGroups: ServiceHubGroup[] = [
   },
 ];
 
-export function getServicesByCategory(category: ServiceHubGroup["id"]) {
-  return servicePages.filter((service) => service.category === category);
-}
+export const hubHeroImage = heroImage(
+  "1504639725590-34d0984388bd",
+  "Macro photograph of code on a dark screen",
+  "Markus Spiske",
+  "https://unsplash.com/@markusspiske",
+);
+
+export const hubOverview = {
+  eyebrow: "Overview",
+  title: "What we build",
+  lead: "Structured services for real product work — every engagement scoped around usable systems, not disconnected deliverables.",
+  paragraphs: [
+    "We work with founders and businesses to design, build, and scale digital products. From early-stage MVPs to production-ready platforms, NexOra focuses on clarity, execution, and long-term scalability.",
+    "As a UK software studio, we structure every engagement around building real systems — not one-off deliverables. Product work, platform rebuilds, and practical AI integration follow the same rule: define it clearly, build it properly, ship it on time.",
+  ],
+  image: hubHeroImage,
+};
 
 export const advancedAiCallout = {
   tag: "Selective partnerships",

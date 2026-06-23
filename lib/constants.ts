@@ -1,4 +1,4 @@
-import { servicePages } from "@/lib/services/content";
+import { getAllServices } from "@/lib/services/index";
 
 export const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -33,7 +33,7 @@ export const NAV_SERVICE_GROUPS = [
   },
 ] as const;
 
-export const FOOTER_SERVICE_LINKS = servicePages.map((service) => ({
+export const FOOTER_SERVICE_LINKS = getAllServices().map((service) => ({
   label: service.title,
   href: `/services/${service.slug}`,
 }));

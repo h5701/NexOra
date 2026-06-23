@@ -1,7 +1,9 @@
 import { CONTACT_EMAIL, CONTACT_PROJECT_TYPES } from "@/lib/constants";
 import { CASE_STUDY_SUMMARIES, STUDIO_POSITIONING } from "@/lib/content/site-copy";
-import { servicePages } from "@/lib/services/content";
+import { FOUNDERS } from "@/lib/content/founders";
+import { getAllServices } from "@/lib/services/index";
 import { advancedAiCallout, serviceHubGroups } from "@/lib/services/hub";
+import { serializeAllServicesForKnowledge } from "@/lib/services/toKnowledge";
 
 const PROCESS_STEPS = [
   {
@@ -23,21 +25,6 @@ const PROCESS_STEPS = [
     step: "04",
     title: "Launch",
     body: "On time. As scoped. Full documentation and support for what comes next.",
-  },
-] as const;
-
-const FOUNDERS = [
-  {
-    name: "Hina Ahmad",
-    role: "Co-founder · Product & Design Strategy",
-    focus:
-      "Product direction, UX strategy, and client experience — turning complex ideas into intuitive, conversion-driven products.",
-  },
-  {
-    name: "Ali Tariq",
-    role: "Co-founder · Engineering & Systems",
-    focus:
-      "Engineering, architecture, and technical delivery — full-stack, IoT, DevOps, cloud, and real-time systems.",
   },
 ] as const;
 
@@ -65,26 +52,18 @@ export function buildChatKnowledge() {
         "We respond to project inquiries within 2 business days with clarity on scope, direction, and next steps.",
     },
     process: PROCESS_STEPS,
-    founders: FOUNDERS,
+    founders: FOUNDERS.map((founder) => ({
+      name: founder.name,
+      role: founder.role,
+      focus: founder.focus,
+      linkedin: founder.linkedin,
+    })),
     serviceGroups: serviceHubGroups.map((group) => ({
       id: group.id,
       label: group.label,
       description: group.description,
     })),
-    services: servicePages.map((service) => ({
-      slug: service.slug,
-      title: service.title,
-      tag: service.tag,
-      path: `/services/${service.slug}`,
-      tier: service.tier,
-      tierLabel: service.tierLabel,
-      outcome: service.outcome,
-      oneLiner: service.hub.oneLiner,
-      contactPath: `/contact?type=${encodeURIComponent(service.contactProjectType)}`,
-      deliverables: service.deliverables,
-      tools: service.tools,
-      approachSummary: service.approach.intro,
-    })),
+    services: serializeAllServicesForKnowledge(getAllServices()),
     advancedAi: {
       title: advancedAiCallout.title,
       tierLabel: advancedAiCallout.tierLabel,

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { NAV_SERVICE_GROUPS } from "@/lib/constants";
 import { STUDIO_POSITIONING } from "@/lib/content/site-copy";
-import { servicePagesBySlug } from "@/lib/services/content";
+import { getService } from "@/lib/services/index";
 import { IMAGE_BLUR_DATA_URL } from "@/lib/services/images";
 
 type ServicesMegaMenuProps = {
@@ -101,7 +101,7 @@ export default function ServicesMegaMenu({
               <ul className="mt-4 flex flex-col gap-1.5" role="none">
                 {group.links.map((link, linkIndex) => {
                   const slug = slugFromHref(link.href);
-                  const service = servicePagesBySlug[slug];
+                  const service = getService(slug);
                   const thumb = service?.hub.cardImage;
 
                   return (
