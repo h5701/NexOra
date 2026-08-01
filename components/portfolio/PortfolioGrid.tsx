@@ -1,6 +1,6 @@
 import Link from "next/link";
-import AlidaCarePreview from "@/components/home/AlidaCarePreview";
 import FikrLessPreview from "@/components/home/FikrLessPreview";
+import FikrLessWebsitePreview from "@/components/home/FikrLessWebsitePreview";
 import CardTopLine from "@/components/ui/CardTopLine";
 import Reveal from "@/components/ui/Reveal";
 import { CASE_STUDY_SUMMARIES } from "@/lib/content/site-copy";
@@ -19,8 +19,8 @@ function CaseStudyCard({
     >
       <CardTopLine />
 
-      {item.preview === "alida" ? (
-        <AlidaCarePreview />
+      {item.preview === "fikrless-website" ? (
+        <FikrLessWebsitePreview />
       ) : (
         <FikrLessPreview />
       )}
@@ -70,10 +70,13 @@ export default function PortfolioGrid({
   animated?: boolean;
   className?: string;
 }) {
+  const gridColsClass =
+    CASE_STUDY_SUMMARIES.length > 1
+      ? "grid-cols-1 md:grid-cols-[1.65fr_1fr]"
+      : "grid-cols-1";
+
   return (
-    <div
-      className={`grid grid-cols-1 md:grid-cols-[1.65fr_1fr] ${GAP_CARD_GRID} ${className}`}
-    >
+    <div className={`grid ${gridColsClass} ${GAP_CARD_GRID} ${className}`}>
       {CASE_STUDY_SUMMARIES.map((item, index) =>
         animated ? (
           <Reveal key={item.title} delay={index * 0.08} className="flex">

@@ -4,11 +4,11 @@ export const STUDIO_POSITIONING =
 export const PORTFOLIO_HEADLINE = "Real products. Real clients. Real outcomes.";
 
 export const PORTFOLIO_LEAD =
-  "Two products in market. Live in users' hands, running real businesses.";
+  "Live in users' hands, running a real business.";
 
 export type CaseStudySummary = {
   href: string;
-  preview: "alida" | "fikrless";
+  preview: "fikrless" | "fikrless-website";
   tags: string[];
   liveTag: string;
   title: string;
@@ -17,19 +17,19 @@ export type CaseStudySummary = {
 
 export const CASE_STUDY_SUMMARIES: CaseStudySummary[] = [
   {
-    href: "/work/alida-care",
-    preview: "alida",
-    tags: ["Healthcare platform", "Live product"],
-    liveTag: "Live product",
-    title: "Alida Care",
-    body: "A live UK care platform connecting families with vetted, CQC-compliant providers — booking, caregiver verification, and the operational backend the business runs on.",
+    href: "/work/fikrless-website",
+    preview: "fikrless-website",
+    tags: ["Mental health platform", "Live website"],
+    liveTag: "Live website",
+    title: "FikrLess - Website",
+    body: "A modern, scalable website designed to make mental wellbeing more accessible. We created a trusted digital platform that connects visitors with professional services, educational resources, community initiatives, and events through a seamless user experience.",
   },
   {
     href: "/work/fikrless",
     preview: "fikrless",
     tags: ["Mental health app", "Live on Play Store"],
     liveTag: "Live on Play Store",
-    title: "FikrLess",
-    body: "A mental health platform for Pakistan, built for a market where seeking support carries real stigma. Connects users with licensed therapists through a discreet, culturally-aware app — live on Google Play.",
+    title: "FikrLess - Mobile App",
+    body: "FikrLess reimagines digital mental healthcare with a thoughtfully designed mobile experience. Built with accessibility, privacy, and user engagement at its core, the app helps users monitor their wellbeing, access expert support, and develop positive habits through an intuitive, feature-rich platform.",
   },
 ];

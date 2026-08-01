@@ -29,9 +29,9 @@ const PROCESS_STEPS = [
 ] as const;
 
 const CASE_STUDY_EXTERNAL_URLS: Record<string, string> = {
-  "Alida Care": "https://www.alidacare.com",
-  FikrLess:
+  "FikrLess - Mobile App":
     "https://play.google.com/store/apps/details?id=com.fikerless",
+  "FikrLess - Website": "https://fikrless.com",
 };
 
 export function buildChatKnowledge() {
@@ -93,8 +93,8 @@ export function buildChatKnowledge() {
       services: "/services",
       contact: "/contact",
       work: {
-        alidaCare: "/work/alida-care",
         fikrless: "/work/fikrless",
+        fikrlessWebsite: "/work/fikrless-website",
       },
     },
   };

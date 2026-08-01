@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const content = {
   eyebrow: "Mental Health Platform · Live on Google Play",
-  title: "FikrLess",
+  title: "FikrLess - Mobile App",
   subtitle:
-    "A mental health platform built for Pakistan \u2014 discreet, culturally-aware, and designed around stigma and privacy from the first screen.",
+    "FikrLess reimagines digital mental healthcare with a thoughtfully designed mobile experience. Built with accessibility, privacy, and user engagement at its core, the app helps users monitor their wellbeing, access expert support, and develop positive habits through an intuitive, feature-rich platform.",
   accentColor: "#00E5D4",
   hero: {
     type: "phones" as const,
@@ -39,30 +39,35 @@ const content = {
   sections: {
     brief: {
       eyebrow: "The brief",
-      headline: "A product that couldn\u2019t be a Western import",
-      body: "Mental health platforms built for Western markets don\u2019t transfer directly to Pakistan. Stigma around seeking psychological support is real and significant, privacy concerns run deeper, and trust in a digital platform has to be earned differently. FikrLess needed a product that understood this from the first screen \u2014 not a localized copy of an existing app.",
+      headline: "A mental health platform built for Pakistan, not adapted to it",
+      body: "Mental health support in Pakistan comes with unique cultural, social, and privacy challenges. FikrLess was created to address these realities from the ground up, rather than adapting a product designed for Western audiences. The goal was to build a trusted, accessible platform where users could confidently seek support, connect with licensed mental health professionals, and access wellbeing resources in a way that respects local attitudes toward mental health.",
     },
     built: {
       eyebrow: "What we built",
-      headline: "Support that meets people where they are",
+      headline: "A complete digital wellbeing ecosystem",
       listIntro:
-        "A culturally-aware mental health platform connecting users with licensed therapists and wellness resources:",
+        "We designed and developed a comprehensive mobile platform that brings together mental health support, self-care tools, and professional services in one seamless experience.",
       listItems: [
-        "A discreet, low-friction entry experience that doesn\u2019t ask users to over-expose themselves before they\u2019re ready",
-        "Dual-path flows for users seeking support and specialists providing it",
-        "Therapist matching and structured support resources built around the realities of access in Pakistan, not assumptions imported from other markets",
-        "A privacy-first design approach throughout, recognising that anonymity and discretion are often the difference between someone using the platform or not",
+        "Secure onboarding designed to reduce friction while protecting user privacy",
+        "Personalised mood tracking, journaling, wellness goals, and daily habit-building tools",
+        "Appointment booking and secure communication with licensed psychologists",
+        "Educational resources, guided audio content, and wellbeing exercises",
+        "Community features, moderated discussions, and motivational content",
+        "Integrated activity tracking including water intake, step counting, weight tracking, and a virtual wellness companion",
+        "Privacy-first architecture designed to encourage trust, confidentiality, and long-term engagement",
       ],
     },
     approach: {
       eyebrow: "The approach",
-      headline: "Culture shaped every product decision",
-      body: "Cultural context shaped every product decision, not just the copy. How someone in this market wants to be approached about mental health, what level of disclosure feels safe, and how trust gets built digitally all needed to be designed for directly \u2014 not assumed from a Western mental health app template.",
+      headline: "Designed around people, not assumptions",
+      body: "Every aspect of the experience was shaped by extensive consideration of how mental health is viewed and accessed in Pakistan. Rather than simply translating an existing product, we designed interactions, onboarding, navigation, and trust-building mechanisms specifically for local users.",
+      listIntro:
+        "The result is an experience that feels approachable, respectful, and easy to use while balancing accessibility, discretion, and professional credibility. Every design decision focused on reducing barriers to seeking support and creating an environment where users feel safe engaging with mental health services.",
     },
     stands: {
       eyebrow: "Where it stands",
-      headline: "Live on Google Play",
-      body: "FikrLess is live and available on Google Play today, serving users across Pakistan.",
+      headline: "Available on Google Play",
+      body: "FikrLess is now live on Google Play, providing users across Pakistan with access to licensed mental health professionals, wellbeing tools, educational resources, and a growing digital support ecosystem. Built with scalability in mind, the platform is positioned for future expansion through additional languages, new wellbeing services, and continuous feature development.",
     },
   },
   externalLink: {

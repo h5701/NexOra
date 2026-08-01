@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import AlidaCareBrowserFrame from "@/components/portfolio/AlidaCareBrowserFrame";
+import BrowserFrame from "@/components/portfolio/BrowserFrame";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CTAStrip from "@/components/home/CTAStrip";
@@ -38,17 +38,13 @@ export type CaseStudyContent = {
   accentColor: string;
   hero:
     | {
-        type: "browser";
-        images: CaseStudyImage[];
-        url: string;
-        topGradient: string;
-        scrollable?: boolean;
-        showScrollHint?: boolean;
-        viewportHeights?: string;
-      }
-    | {
         type: "phones";
         images: CaseStudyImage[];
+      }
+    | {
+        type: "browser";
+        images?: CaseStudyImage[];
+        url?: string;
       };
   sections: {
     brief: CaseStudySection;
@@ -99,13 +95,10 @@ function HeroVisual({
   if (hero.type === "browser") {
     return (
       <div className="mt-10">
-        <AlidaCareBrowserFrame
+        <BrowserFrame
           images={hero.images}
           url={hero.url}
-          topGradient={hero.topGradient}
-          scrollable={hero.scrollable ?? false}
-          showScrollHint={hero.showScrollHint ?? false}
-          viewportHeights={hero.viewportHeights}
+          topGradient={phoneTopGradient}
           priority
           sizes="(max-width: 1160px) 100vw, 1160px"
         />
@@ -213,7 +206,7 @@ export default function CaseStudyPage({ content }: { content: CaseStudyContent }
             <h1 className={`text-headline-section ${MT_SPACE_4} text-left font-[family-name:var(--font-display)] font-bold tracking-[-0.03em] text-[var(--color-text-primary)]`}>
               {content.title}
             </h1>
-            <p className="mt-5 max-w-[560px] text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
+            <p className="mt-5 max-w-none text-base font-light leading-body-relaxed text-[var(--color-text-secondary)]">
               {content.subtitle}
             </p>
 
