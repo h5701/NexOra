@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CaseStudyPage from "@/components/work/CaseStudyPage";
+import { FIKRLESS_WEBSITE_SCROLL_IMAGE } from "@/lib/content/site-copy";
 
 export const metadata: Metadata = {
   title: "FikrLess Website — Case Study | NexOra Digital Studio",
@@ -16,6 +17,8 @@ const content = {
   hero: {
     type: "browser" as const,
     url: "fikrless.com",
+    scrollImage: FIKRLESS_WEBSITE_SCROLL_IMAGE,
+    viewportHeight: 560,
   },
   sections: {
     brief: {

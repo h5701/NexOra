@@ -4,6 +4,7 @@ import Hero from "@/components/home/Hero";
 import Stats from "@/components/home/Stats";
 import Services from "@/components/home/Services";
 import Portfolio from "@/components/home/Portfolio";
+import NexOraLabs from "@/components/home/NexOraLabs";
 import Process from "@/components/home/Process";
 import WhyNexOra from "@/components/home/WhyNexOra";
 import CTAStrip from "@/components/home/CTAStrip";
@@ -17,6 +18,7 @@ export default function Home() {
         <Stats />
         <Services />
         <Portfolio />
+        <NexOraLabs />
         <Process />
         <WhyNexOra />
         <CTAStrip />

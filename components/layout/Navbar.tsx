@@ -32,7 +32,12 @@ function NavLink({
   );
 }
 
-export default function Navbar() {
+export default function Navbar({
+  alwaysLight = false,
+}: {
+  /** Skip the dark-hero text flip for pages whose top section is light, so the logo/links stay visible before scrolling. */
+  alwaysLight?: boolean;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
@@ -82,7 +87,9 @@ export default function Navbar() {
         className={`fixed top-0 right-0 left-0 z-[100] border-b px-[clamp(24px,5vw,80px)] transition-[background,backdrop-filter,border-color,padding,box-shadow] duration-300 ease ${
           scrolled || mobileOpen || servicesOpen
             ? "border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-page)_72%,transparent)] py-3 shadow-[0_10px_34px_-18px_rgba(22,24,43,0.22)] backdrop-blur-[18px] backdrop-saturate-150 md:py-[14px]"
-            : "surface-dark !bg-transparent border-transparent py-4 md:py-[22px]"
+            : alwaysLight
+              ? "!bg-transparent border-transparent py-4 md:py-[22px]"
+              : "surface-dark !bg-transparent border-transparent py-4 md:py-[22px]"
         }`}
       >
         <div className="relative flex items-center justify-between gap-4">
@@ -240,6 +247,7 @@ export default function Navbar() {
                 )}
               </div>
 
+              <NavLink href="/labs" label="NexOra Labs" onClick={closeMobile} className="text-md" />
               <NavLink href="/contact" label="Contact" onClick={closeMobile} className="text-md" />
             </nav>
             <PrimaryButton

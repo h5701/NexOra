@@ -44,6 +44,8 @@ export type CaseStudyContent = {
     | {
         type: "browser";
         images?: CaseStudyImage[];
+        scrollImage?: CaseStudyImage;
+        viewportHeight?: number;
         url?: string;
       };
   sections: {
@@ -97,6 +99,8 @@ function HeroVisual({
       <div className="mt-10">
         <BrowserFrame
           images={hero.images}
+          scrollImage={hero.scrollImage}
+          viewportHeight={hero.viewportHeight}
           url={hero.url}
           topGradient={phoneTopGradient}
           priority

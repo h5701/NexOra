@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CardTopLine from "@/components/ui/CardTopLine";
+import ScrollableWebsiteImage from "@/components/portfolio/ScrollableWebsiteImage";
 import { CARD_DEPTH_CLASS } from "@/lib/styles";
 
 type FrameImage = {
@@ -11,6 +12,10 @@ type FrameImage = {
 
 type BrowserFrameProps = {
   images?: FrameImage[];
+  /** A single tall, seamlessly-stitched page screenshot shown in a scrollable viewport. */
+  scrollImage?: FrameImage;
+  /** Visible height (px) of the scrollable viewport when `scrollImage` is set. */
+  viewportHeight?: number;
   url?: string;
   topGradient?: string;
   priority?: boolean;
@@ -37,39 +42,59 @@ function WebsitePlaceholder() {
 
 export default function BrowserFrame({
   images,
+  scrollImage,
+  viewportHeight,
   url = "fikrless.com",
   topGradient,
   priority = false,
   sizes = "(max-width: 1160px) 100vw, 1160px",
 }: BrowserFrameProps) {
   return (
-    <div className={CARD_DEPTH_CLASS}>
-      <CardTopLine gradient={topGradient} />
+    <div>
+      <div className={CARD_DEPTH_CLASS}>
+        <CardTopLine gradient={topGradient} />
 
-      <div className="relative z-0 flex items-center gap-[5px] border-b border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5">
-        <span className="h-[6px] w-[6px] rounded-full bg-[color-mix(in_srgb,var(--color-text-primary)_22%,transparent)]" />
-        <span className="h-[6px] w-[6px] rounded-full bg-[color-mix(in_srgb,var(--color-text-primary)_22%,transparent)]" />
-        <span className="h-[6px] w-[6px] rounded-full bg-[color-mix(in_srgb,var(--color-text-primary)_22%,transparent)]" />
-        <span className="ml-2 truncate text-xs text-[var(--color-text-muted)]">
-          {url}
-        </span>
+        <div className="relative z-0 flex items-center gap-[5px] border-b border-[var(--color-border)] bg-[var(--color-surface)] px-3 py-2.5">
+          <span className="h-[6px] w-[6px] rounded-full bg-[color-mix(in_srgb,var(--color-text-primary)_22%,transparent)]" />
+          <span className="h-[6px] w-[6px] rounded-full bg-[color-mix(in_srgb,var(--color-text-primary)_22%,transparent)]" />
+          <span className="h-[6px] w-[6px] rounded-full bg-[color-mix(in_srgb,var(--color-text-primary)_22%,transparent)]" />
+          <span className="ml-2 truncate text-xs text-[var(--color-text-muted)]">
+            {url}
+          </span>
+        </div>
+
+        <div className="overflow-hidden rounded-b-[16px] bg-white">
+          {scrollImage ? (
+            <ScrollableWebsiteImage
+              src={scrollImage.src}
+              alt={scrollImage.alt}
+              width={scrollImage.width}
+              height={scrollImage.height}
+              viewportHeight={viewportHeight}
+              priority={priority}
+              sizes={sizes}
+            />
+          ) : images && images.length > 0 ? (
+            <Image
+              src={images[0].src}
+              alt={images[0].alt}
+              width={images[0].width}
+              height={images[0].height}
+              className="block h-auto w-full"
+              sizes={sizes}
+              priority={priority}
+            />
+          ) : (
+            <WebsitePlaceholder />
+          )}
+        </div>
       </div>
 
-      <div className="overflow-hidden rounded-b-[16px] bg-white">
-        {images && images.length > 0 ? (
-          <Image
-            src={images[0].src}
-            alt={images[0].alt}
-            width={images[0].width}
-            height={images[0].height}
-            className="block h-auto w-full"
-            sizes={sizes}
-            priority={priority}
-          />
-        ) : (
-          <WebsitePlaceholder />
-        )}
-      </div>
+      {scrollImage && (
+        <p className="mt-3 text-center text-xs font-medium tracking-[0.08em] text-[var(--color-text-muted)] uppercase">
+          Scroll to explore
+        </p>
+      )}
     </div>
   );
 }
